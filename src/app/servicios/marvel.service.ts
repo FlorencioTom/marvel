@@ -58,11 +58,5 @@ export class MarvelService {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/comics/${id}?${authParams}`);
   }
-  /*getCharacterById(): Observable<any> {
-    const ts = Date.now().toString();
-    const hash = md5(ts + this.privateKey + this.publicKey).toString();
-    const url = `${this.baseUrl}?ts=${ts}&apikey=${this.publicKey}&hash=${hash}`;
 
-    return this.http.get(url);
-  }*/
 }
