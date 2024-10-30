@@ -15,14 +15,15 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   characters: any[] = []; // Aquí puedes almacenar los personajes
+  character: any;
 
   private marvelService = inject(MarvelService);
   constructor() {}
 
   ngOnInit() {
-    this.marvelService.getCharacters().subscribe(response => {
-      this.characters = response.data.results; // Almacena los personajes en la variable
-      console.log(this.characters);
+    this.marvelService.getComics().subscribe(response => {
+      this.character = response.data.results; // Almacena los personajes en la variable
+      console.log('Personaje: ', this.character);
     });
   }
 }
