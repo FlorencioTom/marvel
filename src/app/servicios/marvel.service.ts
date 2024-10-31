@@ -59,4 +59,159 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/comics/${id}?${authParams}`);
   }
 
+  getCharacterByComic(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/comics/${id}/charcters?${authParams}`);
+  }
+
+  getCreatorsByComic(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/comics/${id}/creators?${authParams}`);
+  }
+
+  getEventsByComic(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/comics/${id}/events?${authParams}`);
+  }
+
+  getStoriesByComic(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/comics/${id}/stories?${authParams}`);
+  }
+
+  getCreators(): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators?${authParams}`);
+  }
+
+  getCreatorById(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators/${id}?${authParams}`);
+  }
+
+  getComicsByCreator(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators/${id}/comics?${authParams}`);
+  }
+
+  getEventsByCreator(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators/${id}/events?${authParams}`);
+  }
+
+  getSeriesByCreator(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators/${id}/series?${authParams}`);
+  }
+
+  getStoriesByCreator(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/creators/${id}/stories?${authParams}`);
+  }
+
+  getEvents(): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events?${authParams}`);
+  }
+
+  getEventsById(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}?${authParams}`);
+  }
+
+  getCharactersByEvent(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}/characters?${authParams}`);
+  }
+
+  getComicsByEvent(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}/comics?${authParams}`);
+  }
+
+  getCreatorsByEvent(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}/creators?${authParams}`);
+  }
+
+  getSeriesByEvent(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}/series?${authParams}`);
+  }
+
+  getStoriesByEvent(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/events/${id}/stories?${authParams}`);
+  }
+
+  getSeries(): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series?${authParams}`);
+  }
+
+  getSeriesById(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}?${authParams}`);
+  }
+
+  getCharactersBySeries(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}/characters?${authParams}`);
+  }
+
+  getComicsBySeries(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}/comics?${authParams}`);
+  }
+
+  getCreatorsBySeries(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}/creators?${authParams}`);
+  }
+
+  getEventsBySeries(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}/events?${authParams}`);
+  }
+
+  getStoriesBySeries(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/series/${id}/stories?${authParams}`);
+  }
+
+  getStories(): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories?${authParams}`);
+  }
+
+  getStoriesById(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}?${authParams}`);
+  }
+
+  getCharactersByStories(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}/characters?${authParams}`);
+  }
+
+  getComicsByStories(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}/comics?${authParams}`);
+  }
+
+  getCreatorsByStories(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}/creators?${authParams}`);
+  }
+
+  getEventsByStories(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}/events?${authParams}`);
+  }
+
+  getSeriesByStories(id:number): Observable<any> {
+    const authParams = this.createAuthParams();
+    return this.http.get(`${this.baseUrl}/stories/${id}/series?${authParams}`);
+  }
+
 }
