@@ -1,11 +1,4 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-QJKHUX6U.js";
-import {
   BidiModule,
   DOWN_ARROW,
   Directionality,
@@ -35,6 +28,13 @@ import {
   normalizePassiveListenerOptions,
   supportsScrollBehavior
 } from "./chunk-NVBJZTWU.js";
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-QJKHUX6U.js";
 import {
   CommonModule,
   DOCUMENT,

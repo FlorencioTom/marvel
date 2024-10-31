@@ -3,12 +3,13 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi, withJsonpSupport, withNoXsrfProtection} from '@angular/common/http';
 
 import { TranslateLoader as NgxTranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { translationEsEn } from '../assets/i18n/es_En';
 import { Observable, of } from 'rxjs';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 const TRANSLATIONS: any = {
   EsEn: translationEsEn
@@ -37,6 +38,7 @@ export const appConfig: ApplicationConfig = {
                 withJsonpSupport(),
                 withNoXsrfProtection()
               ),
+              { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
               importProvidersFrom(TranslateModule.forRoot({
                 defaultLanguage: 'EsEn',
                 loader: {
