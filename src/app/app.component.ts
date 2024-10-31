@@ -1,13 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http'; // Importar el módulo aquí
+import { RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { MarvelService } from './servicios/marvel.service';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './componentes/header/header.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true, // Define que este componente es standalone
-  imports: [CommonModule], // Importar HttpClientModule aquí
+  imports: [RouterOutlet, TranslateModule, CommonModule, HeaderComponent, FooterComponent], // Importar HttpClientModule aquí
   providers: [
      // Provee el HttpClient en este nivel
     MarvelService // Proveedor del servicio Marvel

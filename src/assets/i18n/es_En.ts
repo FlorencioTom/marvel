@@ -1,0 +1,20 @@
+export const translationEsEn = {
+    characters:{
+        title:'Personajes'
+    },
+    comics:{
+        title:'Comics'
+    },
+    creators:{
+        title:'Creadores'
+    },
+    events:{
+        title:'Eventos'
+    },
+    series:{
+        title:'Series'
+    },
+    stories:{
+        title:'Historias'
+    }
+}
