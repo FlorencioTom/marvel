@@ -6,12 +6,14 @@ import { SpinnerModule } from '../../spinner.module';
 import { NgxSpinnerComponent } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';  // Importa CommonModule
 import { PaginatorModule } from 'primeng/paginator';
-import SimpleBar from 'simplebar'; // Importa SimpleBar
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [SpinnerModule, NgxSpinnerComponent, MatPaginatorModule, CommonModule, PaginatorModule],
+  imports: [SpinnerModule, NgxSpinnerComponent, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.scss'
 })
