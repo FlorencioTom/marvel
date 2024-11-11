@@ -8,6 +8,13 @@ import {
   TemplatePortal
 } from "./chunk-SMDQFZUE.js";
 import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-6AZUOZL6.js";
+import {
   DOWN_ARROW,
   Directionality,
   ENTER,
@@ -26,13 +33,6 @@ import {
   isFakeTouchstartFromScreenReader,
   normalizePassiveListenerOptions
 } from "./chunk-AGM2TS4Q.js";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-6AZUOZL6.js";
 import {
   CommonModule,
   DOCUMENT

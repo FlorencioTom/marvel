@@ -21,6 +21,15 @@ import {
   ViewportRuler
 } from "./chunk-SMDQFZUE.js";
 import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-6AZUOZL6.js";
+import {
   A,
   A11yModule,
   ActiveDescendantKeyManager,
@@ -53,15 +62,6 @@ import {
   normalizePassiveListenerOptions,
   removeAriaReferencedId
 } from "./chunk-AGM2TS4Q.js";
-import {
-  animate,
-  animateChild,
-  query,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-6AZUOZL6.js";
 import {
   CommonModule,
   DOCUMENT,

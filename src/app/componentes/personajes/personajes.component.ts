@@ -35,7 +35,6 @@ export class PersonajesComponent implements OnInit {
     });
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
       this.characters = response.data.results;
-      console.log(this.characters);
     });
   }
 
@@ -44,7 +43,6 @@ export class PersonajesComponent implements OnInit {
     console.log(this.currentPageIndex);
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
       this.characters = response.data.results;
-      console.log(this.characters);
     });
   }
 } 

@@ -14,6 +14,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     app-header{
       height: 100%;
     }
+    .grid-container{
+      height: calc(100% - 68.58px);
+    }
 }
 
 .grid-container {
@@ -22,7 +25,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     grid-template-rows: repeat(5, auto);    /* 5 filas, ajustadas automáticamente */
     gap: 10px;                              /* Espacio entre los elementos */
     padding: 0px;                          /* Espaciado alrededor de la cuadrícula */
-    overflow:  hidden; /* Oculta el scroll horizontal */
+    overflow-y: auto;
   }
   
   .grid-item {
@@ -57,29 +60,65 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .mat-mdc-paginator-page-size-value{
     display: none;
   }
-  
-  /* Responsividad */
-  
-  /* Para pantallas medianas (hasta 1200px de ancho) */
+
   @media (max-width: 1200px) {
     .grid-container {
       grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
     }
   }
   
-  /* Para pantallas pequeñas (hasta 800px de ancho) */
-  @media (max-width: 700px) {
-    .grid-container {
-      grid-template-columns: repeat(2, 1fr);  /* 2 columnas */
-    }
-  }
   
   /* Para pantallas muy pequeñas (hasta 500px de ancho) */
-  @media (max-width: 500px) {
+  @media (max-width: 700px) {
     .grid-container {
-      grid-template-columns: 1fr;  /* 1 columna */
+      grid-template-columns: repeat(2, 1fr);  
     }
   }
+
+  @media (max-width: 600px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr);  
+    }
+  }
+
+
+  @media (max-width: 800px){
+    /* Reducir el tamaño general del paginador */
+    .p-paginator {
+      font-size: 0.8rem; /* Reduce el tamaño de la fuente */
+      padding: 4px;      /* Ajusta el padding para hacer el paginador más compacto */
+    }
+    
+    /* Reducir el tamaño de los botones de navegación */
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator .p-paginator-next,
+    .p-paginator .p-paginator-prev {
+      min-width: 24px;   /* Ancho mínimo de los botones */
+      height: 24px;      /* Altura de los botones */
+      padding: 2px 6px;  /* Reduce el padding interno */
+      font-size: 0.8rem; /* Tamaño de texto más pequeño */
+    }
+    
+    /* Reducir tamaño de los botones de Primera y Última página */
+    .p-paginator .p-paginator-first,
+    .p-paginator .p-paginator-last {
+      min-width: 24px;
+      height: 24px;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+    }
+    
+    /* Reducir los márgenes entre los elementos del paginador */
+    .p-paginator-element {
+      margin: 0 2px; /* Espacio más reducido entre botones */
+    }
+
+    .grid-container{
+      height: calc(100% - 32px);
+    }
+  }
+
+
   
 
 
