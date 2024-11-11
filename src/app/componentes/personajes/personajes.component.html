@@ -1,2 +1,17 @@
-<p>personajes works!</p>
+<div class="card flex justify-content-center">
+    <p-paginator 
+        (onPageChange)="changePage($event)" 
+        [first]="currentPageIndex * rows" 
+        [rows]="rows" 
+        [totalRecords]="1580" 
+         />
+</div>
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let character of characters">
+        <img [src]="character.thumbnail.path+'.'+character.thumbnail.extension" [alt]="character.name">
+        <div class="item-name-container">
+            <p class="item-name">{{character.name}}</p>
+        </div>
+    </div>
+</div>
  

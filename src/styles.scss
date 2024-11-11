@@ -2,7 +2,7 @@ body{
     margin: 0px;
     padding: 0px;
 }
-html, body { height: 100%; }
+html, body { height: 100%;   overflow: hidden;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .container{
     height: 100%;
@@ -11,8 +11,76 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .container{
         display: flex;
     }
+    app-header{
+      height: 100%;
+    }
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 4 columnas por defecto */
+    grid-template-rows: repeat(5, auto);    /* 5 filas, ajustadas automáticamente */
+    gap: 10px;                              /* Espacio entre los elementos */
+    padding: 0px;                          /* Espaciado alrededor de la cuadrícula */
+    overflow:  hidden; /* Oculta el scroll horizontal */
+  }
+  
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    max-height: 200px; 
+    position: relative;
+  }
+  
+  .grid-item img { 
+    overflow: hidden;
+    width: 100%; 
+    object-fit: cover;            
+  }
+
+  .item-name-container{
+    background-color:  #d7e3ff;
+    width: 100%;
+    position: absolute !important;
+    bottom: 0;
+}
+
+  .item-name{
+    margin-top:10px !important;
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+
+  }
+
+  .mat-mdc-paginator-page-size-value{
+    display: none;
+  }
+  
+  /* Responsividad */
+  
+  /* Para pantallas medianas (hasta 1200px de ancho) */
+  @media (max-width: 1200px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
+    }
+  }
+  
+  /* Para pantallas pequeñas (hasta 800px de ancho) */
+  @media (max-width: 700px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);  /* 2 columnas */
+    }
+  }
+  
+  /* Para pantallas muy pequeñas (hasta 500px de ancho) */
+  @media (max-width: 500px) {
+    .grid-container {
+      grid-template-columns: 1fr;  /* 1 columna */
+    }
+  }
+  
 
 
 

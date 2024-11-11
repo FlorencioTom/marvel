@@ -20,12 +20,11 @@ import { LoadingService } from './servicios/texto-spinner.service';
 })
 export class AppComponent{
 
-  private spinner = inject(NgxSpinnerService);
+  public spinner = inject(NgxSpinnerService);
   public loadingService = inject(LoadingService);
 
   textoCarga = this.loadingService.loadingText;
 
   constructor() {}
-
 
 }

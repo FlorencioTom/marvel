@@ -17,6 +17,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Mostrar el spinner antes de la solicitud
+    //this.spinner.show();
     this.spinner.show();
 
     return next.handle(req).pipe(

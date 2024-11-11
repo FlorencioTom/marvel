@@ -32,7 +32,10 @@
               }
             ],
             "styles": [
+              "node_modules/simplebar/dist/simplebar.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
+              "node_modules/load-awesome/css/ball-8bits.css",
               "src/styles.scss"
             ],
             "scripts": [],

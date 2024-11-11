@@ -28,9 +28,11 @@
     "blueimp-md5": "^2.19.0",
     "crypto-js": "^4.2.0",
     "express": "^4.18.2",
+    "load-awesome": "^1.1.0",
     "ngx-spinner": "^17.0.0",
     "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
+    "simplebar": "^6.2.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
