@@ -1,6 +1,6 @@
-import { Component, inject, ViewChild, AfterViewInit, ElementRef, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MarvelService } from '../../servicios/marvel.service';
-import { MatPaginatorModule, PageEvent, MatPaginator} from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { LoadingService } from '../../servicios/texto-spinner.service';
 import { SpinnerModule } from '../../spinner.module';
 import { NgxSpinnerComponent } from 'ngx-spinner';
@@ -29,6 +29,7 @@ export class PersonajesComponent implements OnInit {
   rows: number = 20;
   loadingText: string = this.loadingService.loadingText;
   name: string = '';
+  searchByName: boolean = false;
 
   constructor() {}
 
@@ -44,15 +45,40 @@ export class PersonajesComponent implements OnInit {
   changePage(event: any){
     this.currentPageIndex = event.page;
     console.log(this.currentPageIndex);
-    this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+    if(this.searchByName){
+      this.searCharacterByName(event.page);
+    }else{
+      this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+        this.characters = response.data.results;
+        this.searchByName = false;
+      });
+    }
+  }
+
+  searCharacterByName(page: number){
+    this.marvelService.getCharactersByName(page, this.rows, this.name).subscribe(response => {
       this.characters = response.data.results;
     });
   }
 
-  searchCaracterByName(){
+  firstCall(){
+    this.currentPageIndex = 0;
+    this.searchByName = true;
     this.marvelService.getCharactersByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
       this.characters = response.data.results;
-    });    
+    });
   }
+
+  backToAllCharacters(){
+    this.searchByName = false;
+    this.currentPageIndex = 0;
+    this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+      this.characters = response.data.results;
+      this.searchByName = false;
+    });
+  }
+
 } 
+
+/**Si la pagina actual tiene mesnos de 20 personajes desabilitar siguientes paginas */
  

@@ -1,14 +1,16 @@
 <div class="sub-menu">
-    <p-paginator 
+    <p-paginator
         (onPageChange)="changePage($event)" 
         [first]="currentPageIndex * rows" 
         [rows]="rows" 
         [totalRecords]="1580" 
          />
+         <span (click)="backToAllCharacters()" *ngIf="searchByName">Back to all characters</span>
          <p-iconField iconPosition="left">
             <p-inputIcon styleClass="pi pi-search" />
-            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="searchCaracterByName()" />
+            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
         </p-iconField>
+        
 </div>
 <div class="container">
     <div class="grid-container">
