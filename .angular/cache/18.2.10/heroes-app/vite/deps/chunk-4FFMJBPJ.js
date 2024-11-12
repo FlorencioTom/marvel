@@ -1,7 +1,6 @@
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   getDOM
-} from "./chunk-DQZ2PILJ.js";
+} from "./chunk-3GPHMYWF.js";
 import {
   ChangeDetectorRef,
   Directive,
@@ -27,7 +26,6 @@ import {
   inject,
   isPromise,
   isSubscribable,
-  require_operators,
   setClassMetadata,
   signal,
   untracked,
@@ -43,19 +41,19 @@ import {
   ɵɵdirectiveInject,
   ɵɵgetInheritedFactory,
   ɵɵlistener
-} from "./chunk-TKQWSO4T.js";
+} from "./chunk-2IRPN5DT.js";
 import {
-  require_cjs
-} from "./chunk-2H3L6IVL.js";
+  Subject,
+  forkJoin,
+  from,
+  map
+} from "./chunk-66JPAEYR.js";
 import {
   __spreadProps,
-  __spreadValues,
-  __toESM
-} from "./chunk-NQ4HTGF6.js";
+  __spreadValues
+} from "./chunk-3OV72XIM.js";
 
 // node_modules/@angular/forms/fesm2022/forms.mjs
-var import_rxjs = __toESM(require_cjs(), 1);
-var import_operators = __toESM(require_operators(), 1);
 var BaseControlValueAccessor = class _BaseControlValueAccessor {
   constructor(_renderer, _elementRef) {
     this._renderer = _renderer;
@@ -673,7 +671,7 @@ function isPresent(o) {
   return o != null;
 }
 function toObservable(value) {
-  const obs = isPromise(value) ? (0, import_rxjs.from)(value) : value;
+  const obs = isPromise(value) ? from(value) : value;
   if ((typeof ngDevMode === "undefined" || ngDevMode) && !isSubscribable(obs)) {
     let errorMessage = `Expected async validator to return Promise or Observable.`;
     if (typeof value === "object") {
@@ -718,7 +716,7 @@ function composeAsync(validators) {
   if (presentValidators.length == 0) return null;
   return function(control) {
     const observables = executeValidators(control, presentValidators).map(toObservable);
-    return (0, import_rxjs.forkJoin)(observables).pipe((0, import_operators.map)(mergeErrors));
+    return forkJoin(observables).pipe(map(mergeErrors));
   };
 }
 function composeAsyncValidators(validators) {
@@ -1291,20 +1289,20 @@ function ngModelWarning(directiveName) {
   https://angular.io/api/forms/${directiveName === "formControl" ? "FormControlDirective" : "FormControlName"}#use-with-ngmodel
   `;
 }
-function describeKey(isFormGroup, key) {
-  return isFormGroup ? `with name: '${key}'` : `at index: ${key}`;
+function describeKey(isFormGroup2, key) {
+  return isFormGroup2 ? `with name: '${key}'` : `at index: ${key}`;
 }
-function noControlsError(isFormGroup) {
+function noControlsError(isFormGroup2) {
   return `
-    There are no form controls registered with this ${isFormGroup ? "group" : "array"} yet. If you're using ngModel,
+    There are no form controls registered with this ${isFormGroup2 ? "group" : "array"} yet. If you're using ngModel,
     you may want to check next tick (e.g. use setTimeout).
   `;
 }
-function missingControlError(isFormGroup, key) {
-  return `Cannot find form control ${describeKey(isFormGroup, key)}`;
+function missingControlError(isFormGroup2, key) {
+  return `Cannot find form control ${describeKey(isFormGroup2, key)}`;
 }
-function missingControlValueError(isFormGroup, key) {
-  return `Must supply a value for form control ${describeKey(isFormGroup, key)}`;
+function missingControlValueError(isFormGroup2, key) {
+  return `Must supply a value for form control ${describeKey(isFormGroup2, key)}`;
 }
 var VALID = "VALID";
 var INVALID = "INVALID";
@@ -1411,7 +1409,7 @@ var AbstractControl = class {
     this.pristineReactive = signal(true);
     this._touched = computed(() => this.touchedReactive());
     this.touchedReactive = signal(false);
-    this._events = new import_rxjs.Subject();
+    this._events = new Subject();
     this.events = this._events.asObservable();
     this._onDisabledChange = [];
     this._assignValidators(validators);
@@ -2509,8 +2507,11 @@ function validateFormGroupControls(controls) {
     console.warn(`FormGroup keys cannot include \`.\`, please replace the keys for: ${invalidKeys.join(",")}.`);
   }
 }
+var UntypedFormGroup = FormGroup;
+var isFormGroup = (control) => control instanceof FormGroup;
 var FormRecord = class extends FormGroup {
 };
+var isFormRecord = (control) => control instanceof FormRecord;
 var CALL_SET_DISABLED_STATE = new InjectionToken("CallSetDisabledState", {
   providedIn: "root",
   factory: () => setDisabledStateDefault
@@ -3112,6 +3113,7 @@ var FormControl = class FormControl2 extends AbstractControl {
     }
   }
 };
+var UntypedFormControl = FormControl;
 var isFormControl = (control) => control instanceof FormControl;
 var AbstractFormGroupDirective = class _AbstractFormGroupDirective extends ControlContainer {
   /** @nodoc */
@@ -6085,6 +6087,8 @@ var FormArray = class extends AbstractControl {
     return this.at(name) ?? null;
   }
 };
+var UntypedFormArray = FormArray;
+var isFormArray = (control) => control instanceof FormArray;
 function isAbstractControlOptions(options) {
   return !!options && (options.asyncValidators !== void 0 || options.validators !== void 0 || options.updateOn !== void 0);
 }
@@ -6434,13 +6438,68 @@ var ReactiveFormsModule = class _ReactiveFormsModule {
 
 export {
   NG_VALUE_ACCESSOR,
+  CheckboxControlValueAccessor,
+  COMPOSITION_BUFFER_MODE,
+  DefaultValueAccessor,
+  NG_VALIDATORS,
+  NG_ASYNC_VALIDATORS,
   Validators,
+  AbstractControlDirective,
+  ControlContainer,
   NgControl,
   NgControlStatus,
+  NgControlStatusGroup,
+  ControlEvent,
+  ValueChangeEvent,
+  PristineChangeEvent,
+  TouchedChangeEvent,
+  StatusChangeEvent,
+  FormSubmittedEvent,
+  FormResetEvent,
+  AbstractControl,
+  FormGroup,
+  UntypedFormGroup,
+  isFormGroup,
+  FormRecord,
+  isFormRecord,
   NgForm,
+  FormControl,
+  UntypedFormControl,
+  isFormControl,
+  AbstractFormGroupDirective,
+  NgModelGroup,
   NgModel,
+  ɵNgNoValidate,
+  NumberValueAccessor,
+  RadioControlValueAccessor,
+  RangeValueAccessor,
+  FormControlDirective,
   FormGroupDirective,
-  FormsModule
+  FormGroupName,
+  FormArrayName,
+  FormControlName,
+  SelectControlValueAccessor,
+  NgSelectOption,
+  SelectMultipleControlValueAccessor,
+  ɵNgSelectMultipleOption,
+  MaxValidator,
+  MinValidator,
+  RequiredValidator,
+  CheckboxRequiredValidator,
+  EmailValidator,
+  MinLengthValidator,
+  MaxLengthValidator,
+  PatternValidator,
+  ɵInternalFormsSharedModule,
+  FormArray,
+  UntypedFormArray,
+  isFormArray,
+  FormBuilder,
+  NonNullableFormBuilder,
+  UntypedFormBuilder,
+  VERSION,
+  FormsModule,
+  ReactiveFormsModule
 };
 /*! Bundled license information:
 
@@ -6451,4 +6510,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-R7GVADHR.js.map
+//# sourceMappingURL=chunk-4FFMJBPJ.js.map

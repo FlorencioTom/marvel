@@ -4,7 +4,7 @@ import {
 } from "./chunk-IP7GYS7V.js";
 import {
   NgModel
-} from "./chunk-R7GVADHR.js";
+} from "./chunk-BF2IJN4L.js";
 import {
   CommonModule
 } from "./chunk-DQZ2PILJ.js";
@@ -140,4 +140,4 @@ export {
   InputText,
   InputTextModule
 };
-//# sourceMappingURL=chunk-WJG5PUFN.js.map
+//# sourceMappingURL=chunk-KHOCWTXM.js.map

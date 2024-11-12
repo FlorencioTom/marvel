@@ -28,6 +28,7 @@ export class PersonajesComponent implements OnInit {
   currentPageIndex: number = 0;
   rows: number = 20;
   loadingText: string = this.loadingService.loadingText;
+  name: string = '';
 
   constructor() {}
 
@@ -46,6 +47,12 @@ export class PersonajesComponent implements OnInit {
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
       this.characters = response.data.results;
     });
+  }
+
+  searchCaracterByName(){
+    this.marvelService.getCharactersByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
+      this.characters = response.data.results;
+    });    
   }
 } 
  
