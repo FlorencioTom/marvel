@@ -5,7 +5,7 @@
         [rows]="rows" 
         [totalRecords]="1580" 
          />
-         <span (click)="backToAllCharacters()" *ngIf="searchByName">Back to all characters</span>
+         <span (click)="backToAllCharacters()" class="backToAllCharacters" *ngIf="searchByName">Back to all characters</span>
          <p-iconField iconPosition="left">
             <p-inputIcon styleClass="pi pi-search" />
             <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />

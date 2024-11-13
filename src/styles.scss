@@ -4,20 +4,19 @@ body{
 }
 html, body { height: 100%;   overflow: hidden;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.backToAllCharacters{
+  cursor: pointer;
+  background-color: #1067bd;
+  color:white;
+  border-radius: 5px;
+  padding: 10px;
+}
 .container{
     height: 100%;
 }
-@media (max-width: 900px) {
-    .container{
-        display: flex;
-    }
-    app-header{
-      height: 100%;
-    }
-    .grid-container{
-      height: calc(100% - 68.58px);
-    }
-}
+  .grid-container{
+    height: calc(100% - 150px);
+  }
 
 .grid-container {
     display: grid;
@@ -90,15 +89,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .grid-container {
       grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
     }
+
+    /*.grid-container{
+      height: calc(100% - 210px);
+    }*/
   }
 
-  @media (max-width: 910px) {
+  @media (max-width: 900px) {
     .sub-menu{
       display: flex;
       flex-direction: column;
       padding-right: 10px;
       margin-bottom: 10px;
       margin-top: 10px;
+    }
+
+    .container{
+      display: flex;
+    }
+
+    app-header{
+      height: 100%;
+    }
+
+    .grid-container{
+      height: calc(100% - 130.58px);
     }
   }
   
@@ -149,7 +164,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 
     .grid-container{
-      height: calc(100% - 32px);
+      height: calc(100% - 95px);
     }
   }
 
