@@ -4,19 +4,45 @@ body{
 }
 html, body { height: 100%;   overflow: hidden;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.back{
+  width: 100%;
+  display: flex;
+  position:absolute;
+  z-index: 99;
+  bottom:100px;
+  justify-content: center;
+  align-items: center;
+}
 .backToAllCharacters{
   cursor: pointer;
-  background-color: #1067bd;
+  background-color: #000000;
   color:white;
   border-radius: 5px;
   padding: 10px;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.6);
+  animation: float 10s ease infinite; 
+}
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0); /* Posición inicial y final */
+  }
+  25% {
+    transform: translate(10px, -10px); /* Desplaza a la derecha y arriba */
+  }
+  50% {
+    transform: translate(0, -15px); /* Vuelve al centro y sube un poco más */
+  }
+  75% {
+    transform: translate(-10px, -10px); /* Desplaza a la izquierda y arriba */
+  }
 }
 .container{
     height: 100%;
 }
-  .grid-container{
-    height: calc(100% - 150px);
-  }
+
+.grid-container{
+  height: calc(100% - 150px);
+}
 
 .grid-container {
     display: grid;
@@ -34,6 +60,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center;
     max-height: 200px; 
     position: relative;
+    cursor: pointer;
   }
   
   .grid-item img { 

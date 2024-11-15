@@ -6,15 +6,17 @@ import { EventosComponent } from './componentes/eventos/eventos.component';
 import { SeriesComponent } from './componentes/series/series.component';
 import { ComicsComponent } from './componentes/comics/comics.component';
 import { PersonajesComponent } from './componentes/personajes/personajes.component';
+import { PersonajeComponent } from './componentes/personajes/personaje/personaje.component';
 
 export const routes: Routes = [
     { path: 'personajes',  component: PersonajesComponent},
+    { path: 'personajes/:id',  component: PersonajeComponent},
     { path: 'comics', component: ComicsComponent },
     { path: 'creadores', component: CreadoresComponent },
     { path: 'eventos', component:  EventosComponent},
     { path: 'series', component:  SeriesComponent},
     { path: 'historias', component: HistoriasComponent },
-    { path: '', pathMatch: "prefix", redirectTo: 'comics' }
+    { path: '', pathMatch: "prefix", redirectTo: 'personajes' }
 ];
 
 @NgModule({

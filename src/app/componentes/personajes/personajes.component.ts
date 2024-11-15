@@ -9,6 +9,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personajes',
@@ -31,15 +32,22 @@ export class PersonajesComponent implements OnInit {
   name: string = '';
   searchByName: boolean = false;
 
-  constructor() {}
-
+  constructor(private router: Router) {}
   ngOnInit() {
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando personajes';
     });
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+
       this.characters = response.data.results;
+      console.log(this.characters);
+      this.characters.forEach(x => {
+        /*if(x.thumbnail.path.includes('not_available')){
+          x.thumbnail.path = 'https://placehold.co/729x729?text=Sorry,+we+have+no+image+of+this+hero'
+        }*/
+      })
     });
+    
   }
 
   changePage(event: any){
@@ -56,17 +64,21 @@ export class PersonajesComponent implements OnInit {
   }
 
   searCharacterByName(page: number){
-    this.marvelService.getCharactersByName(page, this.rows, this.name).subscribe(response => {
-      this.characters = response.data.results;
-    });
+      this.marvelService.getCharactersByName(page, this.rows, this.name).subscribe(response => {
+        this.characters = response.data.results;
+      });
   }
 
   firstCall(){
-    this.currentPageIndex = 0;
-    this.searchByName = true;
-    this.marvelService.getCharactersByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
-      this.characters = response.data.results;
-    });
+    if(this.name === ''){
+      this.backToAllCharacters();
+    }else{
+      this.currentPageIndex = 0;
+      this.searchByName = true;
+      this.marvelService.getCharactersByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
+        this.characters = response.data.results;
+      });
+    }
   }
 
   backToAllCharacters(){
@@ -76,6 +88,10 @@ export class PersonajesComponent implements OnInit {
       this.characters = response.data.results;
       this.searchByName = false;
     });
+  }
+
+  goToCharcater(id: number): void {
+    this.router.navigate(['/personajes', id]);
   }
 
 } 

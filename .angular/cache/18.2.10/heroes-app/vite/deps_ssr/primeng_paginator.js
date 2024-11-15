@@ -15,6 +15,13 @@ import {
   zindexutils
 } from "./chunk-IP7GYS7V.js";
 import {
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  NgControlStatus,
+  NgModel
+} from "./chunk-BF2IJN4L.js";
+import {
   animate,
   animation,
   style,
@@ -22,13 +29,6 @@ import {
   trigger,
   useAnimation
 } from "./chunk-6AZUOZL6.js";
-import {
-  FormsModule,
-  NG_VALUE_ACCESSOR,
-  NgControl,
-  NgControlStatus,
-  NgModel
-} from "./chunk-BF2IJN4L.js";
 import {
   CommonModule,
   DOCUMENT,

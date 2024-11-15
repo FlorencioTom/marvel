@@ -1,3 +1,6 @@
+<!--<div *ngIf="searchByName" class="back animate__animated animate__bounce">
+    <span (click)="backToAllCharacters()" class="backToAllCharacters" >Back to all characters</span>
+</div> -->
 <div class="sub-menu">
     <p-paginator
         (onPageChange)="changePage($event)" 
@@ -5,7 +8,6 @@
         [rows]="rows" 
         [totalRecords]="1580" 
          />
-         <span (click)="backToAllCharacters()" class="backToAllCharacters" *ngIf="searchByName">Back to all characters</span>
          <p-iconField iconPosition="left">
             <p-inputIcon styleClass="pi pi-search" />
             <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
@@ -14,7 +16,7 @@
 </div>
 <div class="container">
     <div class="grid-container">
-        <div class="grid-item" *ngFor="let character of characters">
+        <div class="grid-item" *ngFor="let character of characters" (click)="goToCharcater(character.id)">
             <img [src]="character.thumbnail.path+'.'+character.thumbnail.extension" [alt]="character.name">
             <div class="item-name-container">
                 <p class="item-name">{{character.name}}</p>
