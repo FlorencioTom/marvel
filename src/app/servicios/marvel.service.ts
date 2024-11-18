@@ -31,7 +31,7 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/characters?${authParams}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`);
   }
 
-  getCharacterById(id:number): Observable<any> {
+  getCharacterById(id:string): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/characters/${id}?${authParams}`);
   }

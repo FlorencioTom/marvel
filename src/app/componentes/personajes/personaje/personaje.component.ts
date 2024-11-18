@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MarvelService } from '../../../servicios/marvel.service';
 
 @Component({
   selector: 'app-personaje',
@@ -10,11 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PersonajeComponent implements OnInit {
   id!: string; 
+  character: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!
-    console.log(this.id);; 
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.marvelService.getCharacterById(this.id).subscribe(response => {
+      this.character = response.data.results;
+      console.log(this.character);
+      console.log(response);
+    })
   }
 }
