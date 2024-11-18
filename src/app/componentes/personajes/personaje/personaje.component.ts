@@ -18,7 +18,7 @@ export class PersonajeComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.marvelService.getCharacterById(this.id).subscribe(response => {
-      this.character = response.data.results;
+      this.character = response.data.results[0];
       console.log(this.character);
       console.log(response);
     })

@@ -1,1 +1,5 @@
-<p>personaje works!</p>
+<div class="character">
+    <h1 class="title">{{character.name}}</h1>
+    <p class="description">{{character.description}}</p>
+    <img class="character-img" [src]="character.thumbnail.path + '.' +character.thumbnail.extension" alt="">
+</div>
