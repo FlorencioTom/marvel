@@ -19,6 +19,12 @@ export class MarvelService {
     return `ts=${ts}&apikey=${this.publicKey}&hash=${hash}`;
   }
 
+  getUriInfo(uri:string): Observable<any> {
+    const authParams = this.createAuthParams();
+    const headers = { 'Accept': 'application/json' };
+    return this.http.get<any>(`${uri}?${authParams}`);    
+  }
+
   getCharacters(page: number, limit:number): Observable<any> {
     const authParams = this.createAuthParams();
     const offset = page * limit;

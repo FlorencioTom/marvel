@@ -1,7 +1,7 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   PrimeNGConfig
-} from "./chunk-IP7GYS7V.js";
+} from "./chunk-SVVIDQHK.js";
 import {
   NgModel
 } from "./chunk-BF2IJN4L.js";
@@ -140,4 +140,4 @@ export {
   InputText,
   InputTextModule
 };
-//# sourceMappingURL=chunk-KHOCWTXM.js.map
+//# sourceMappingURL=chunk-NHLIHVKW.js.map
