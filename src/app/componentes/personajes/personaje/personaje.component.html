@@ -1,13 +1,13 @@
-<div class="character">
-    <h1 class="title">{{character.name}}</h1>
+<div class="character" *ngIf="!error">
+    <h1 class="title">{{character?.name}}</h1>
     <p class="description">
-        {{character.description}}
+        {{character?.description}}
         <br><br>
-        <span class="character-img-footer">Date of last modification: <span class="bold">{{character.modified}}</span></span>
+        <span class="character-img-footer">Date of last modification: <span class="bold">{{character?.modified}}</span></span>
     </p>
     <div class="container-references">
         <div class="containeer-img">
-            <img class="character-img" [src]="character.thumbnail.path + '.' +character.thumbnail.extension" alt="">
+            <img class="character-img" [src]="character?.thumbnail.path + '.' +character?.thumbnail.extension" alt="">
         </div>
         <div class="references">
             <div *ngIf="comics.length > 0">
@@ -28,4 +28,7 @@
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="error" class="error">
+    <h1 class="error">We have no record of the character you are trying to search for.</h1>
 </div>

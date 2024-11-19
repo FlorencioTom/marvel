@@ -19,20 +19,25 @@ export class PersonajeComponent implements OnInit {
   series: any = [];
   stories: any = [];
   events: any = [];
+  error:boolean = false;
 
   constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    this.marvelService.getCharacterById(this.id).subscribe(response => {
-      this.character = response.data.results[0];
-      console.log(this.character);
-      console.log(this.character.comics.collectionURI);
-      this.comics = this.character.comics.items; 
-      this.series = this.character.series.items;
-      this.stories = this.character.stories.items;
-      this.events = this.character.events.items;
-      this.character.modified = this.formatDate(this.character.modified);
+    this.marvelService.getCharacterById(this.id).subscribe(
+      response => {
+        this.character = response.data.results[0];
+        console.log(this.character);
+        console.log(this.character.comics.collectionURI);
+        this.comics = this.character.comics.items; 
+        this.series = this.character.series.items;
+        this.stories = this.character.stories.items;
+        this.events = this.character.events.items;
+        this.character.modified = this.formatDate(this.character.modified);
+      }, error => {
+        //console.error('Error fetching character:');
+        this.error = true;
     })
   }
 

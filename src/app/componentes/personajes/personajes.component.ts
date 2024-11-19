@@ -31,6 +31,7 @@ export class PersonajesComponent implements OnInit {
   loadingText: string = this.loadingService.loadingText;
   name: string = '';
   searchByName: boolean = false;
+  total: any;
 
   constructor(private router: Router) {}
   ngOnInit() {
@@ -38,14 +39,14 @@ export class PersonajesComponent implements OnInit {
       this.loadingService.loadingText = 'Cargando personajes';
     });
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
-
       this.characters = response.data.results;
+      this.total = response.data.total;
       console.log(this.characters);
-      this.characters.forEach(x => {
-        /*if(x.thumbnail.path.includes('not_available')){
+      /*this.characters.forEach(x => {
+        if(x.thumbnail.path.includes('not_available')){
           x.thumbnail.path = 'https://placehold.co/729x729?text=Sorry,+we+have+no+image+of+this+hero'
-        }*/
-      })
+        }
+      })*/
     });
     
   }

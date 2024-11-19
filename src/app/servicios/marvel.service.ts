@@ -62,14 +62,21 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/characters/${id}/stories?${authParams}`);
   }
 
-  getComics(): Observable<any> {
+  getComics(page: number, limit:number): Observable<any> {
     const authParams = this.createAuthParams();
-    return this.http.get(`${this.baseUrl}/comics?${authParams}`);
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/comics?${authParams}&limit=${limit}&offset=${offset}`);
   }
 
   getComicById(id:number): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/comics/${id}?${authParams}`);
+  }
+
+  getComicsByTitle(page: number, limit:number, name: string): Observable<any> {
+    const authParams = this.createAuthParams();
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/comics?${authParams}&limit=${limit}&offset=${offset}&titleStartsWith=${name}`);
   }
 
   getCharacterByComic(id:number): Observable<any> {

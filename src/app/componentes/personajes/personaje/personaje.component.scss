@@ -27,6 +27,11 @@
 
     .link{
         display: block !important;
+        text-decoration: none;
+        color:#1067bd;
+    }
+    .link:hover{
+        color:#000000;
     }
 }
 .bold{
@@ -34,6 +39,20 @@
 }
 .container-img{
     position: sticky;
+}
+
+.error{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    h1{
+        color:red;
+        text-align: center;
+        margin-top: 50px;
+        padding: 50px;
+        font-weight: bold;
+    }
 }
 
 @media (max-width: 900px) {

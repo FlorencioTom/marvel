@@ -1,12 +1,9 @@
-<!--<div *ngIf="searchByName" class="back animate__animated animate__bounce">
-    <span (click)="backToAllCharacters()" class="backToAllCharacters" >Back to all characters</span>
-</div> -->
 <div class="sub-menu">
     <p-paginator
         (onPageChange)="changePage($event)" 
         [first]="currentPageIndex * rows" 
         [rows]="rows" 
-        [totalRecords]="1580" 
+        [totalRecords]="total" 
          />
          <p-iconField iconPosition="left">
             <p-inputIcon styleClass="pi pi-search" />

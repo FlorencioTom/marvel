@@ -112,6 +112,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-bottom: 1px solid  #d7e3ff;
   }
 
+  .logo-marvel{
+    cursor: pointer;
+  }
+
+  .logo-marvel:hover{
+    //marvel color #ec1d24
+  }
+
   @media (max-width: 1200px) {
     .grid-container {
       grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
