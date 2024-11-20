@@ -35,7 +35,6 @@ export class ComicComponent {
       response => {
         console.log(response.data.results);
         this.comic = response.data.results[0];
-
         this.characters = this.comic.characters.items;
         this.series = this.comic.series;
         this.stories = this.comic.stories.items;
