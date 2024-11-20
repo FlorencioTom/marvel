@@ -1,1 +1,37 @@
-<p>comic works!</p>
+ <div class="character" *ngIf="!error">
+    <h2 class="title">{{comic?.title}}</h2>
+  <p class="description">
+    {{ comic?.textObjects?.[0]?.text || '' }}
+        <br><br>
+    </p>
+   <div class="container-references">
+        <div class="containeer-img">
+            <img class="character-img" [src]="comic?.thumbnail?.path + '.' +comic?.thumbnail?.extension" alt="">
+        </div>
+        <div class="references">
+            <div *ngIf="characters?.length > 0">
+                <h3>Characters</h3>
+                <a class="link" *ngFor="let enlace of characters" href="">{{enlace.name}}</a>
+            </div>
+            <div *ngIf="series">
+                <h3>Series</h3>
+                <p>{{series.name}}</p>
+            </div>
+            <div *ngIf="stories.length > 0">
+                <h3>Stories</h3>
+                <a class="link" *ngFor="let enlace of stories" href="">{{enlace.name}}</a>
+            </div>
+            <div *ngIf="creators.length > 0">
+                <h3>Creators</h3>
+                <a class="link" *ngFor="let enlace of creators" href="">{{enlace.name}}</a>
+            </div>
+            <div *ngIf="events.length > 0">
+                <h3>Events</h3>
+                <a class="link" *ngFor="let enlace of events" href="">{{enlace.name}}</a>
+            </div>
+        </div>  
+    </div>
+</div>
+<div *ngIf="error" class="error">
+    <h1 class="error">We have no record of the character you are trying to search for.</h1>
+</div>

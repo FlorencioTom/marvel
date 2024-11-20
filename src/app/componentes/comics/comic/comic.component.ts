@@ -19,16 +19,31 @@ export class ComicComponent {
 
   constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
 
-  id!: string; 
-  character: any;
-  comics: any = [];
+  id!: any; 
+  characters: any;
+  comic: any = [];
   series: any = [];
   stories: any = [];
   events: any = [];
+  creators: any = [];
   error:boolean = false;
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     console.log(this.id);
+    this.marvelService.getComicById(this.id).subscribe(
+      response => {
+        console.log(response.data.results);
+        this.comic = response.data.results[0];
+
+        this.characters = this.comic.characters.items;
+        this.series = this.comic.series;
+        this.stories = this.comic.stories.items;
+        this.events = this.comic.events.items;
+        this.creators = this.comic.creators.items;
+      }, error => {
+        //console.error('Error fetching character:');
+        this.error = true;
+    })
   }
 }
