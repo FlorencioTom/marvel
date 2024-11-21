@@ -22,7 +22,7 @@ export class MarvelService {
   getUriInfo(uri:string): Observable<any> {
     const authParams = this.createAuthParams();
     const headers = { 'Accept': 'application/json' };
-    return this.http.get<any>(`${uri}?${authParams}`);    
+    return this.http.get(`${uri}?${authParams}`);    
   }
 
   getCharacters(page: number, limit:number): Observable<any> {

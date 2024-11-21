@@ -11,7 +11,7 @@
         <div class="references">
             <div *ngIf="characters?.length > 0">
                 <h3>Characters</h3>
-                <a class="link" *ngFor="let enlace of characters" href="">{{enlace.name}}</a>
+                <p class="link" *ngFor="let enlace of characters" (click)="goToCharacter(enlace.resourceURI)">{{enlace.name}}</p>
             </div>
             <div *ngIf="series">
                 <h3>Series</h3>

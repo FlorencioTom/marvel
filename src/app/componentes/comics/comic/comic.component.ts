@@ -5,6 +5,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CommonModule } from '@angular/common'; 
 import { LoadingService } from '../../../servicios/texto-spinner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comic',
@@ -17,7 +18,7 @@ export class ComicComponent {
 
   public loadingService = inject(LoadingService);
 
-  constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
+  constructor(private route: ActivatedRoute, private marvelService: MarvelService, private router: Router) {}
 
   id!: any; 
   characters: any;
@@ -44,5 +45,10 @@ export class ComicComponent {
         //console.error('Error fetching character:');
         this.error = true;
     })
+  }
+
+  goToCharacter(uri: string){ 
+    const id = uri.substring(uri.lastIndexOf("/") + 1);
+    this.router.navigate(['/personajes', id]);
   }
 }
