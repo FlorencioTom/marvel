@@ -1,1 +1,23 @@
-<p>creadores works!</p>
+<div class="sub-menu">
+    <p-paginator
+        (onPageChange)="changePage($event)" 
+        [first]="currentPageIndex * rows" 
+        [rows]="rows" 
+        [totalRecords]="total" 
+         />
+         <p-iconField iconPosition="left">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
+        </p-iconField>
+        
+</div>
+<div class="container">
+    <div class="grid-container">
+        <div class="grid-item" *ngFor="let creator of creators" (click)="goToCreator(creator.id)">
+            <img [src]="creator.thumbnail.path+'.'+creator.thumbnail.extension" [alt]="creator.name">
+            <div class="item-name-container">
+                <p class="item-name">{{creator.firstName}}</p>
+            </div>
+        </div>
+    </div>
+</div>

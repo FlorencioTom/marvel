@@ -99,9 +99,10 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/comics/${id}/stories?${authParams}`);
   }
 
-  getCreators(): Observable<any> {
+  getCreators(page: number, limit:number): Observable<any> {
     const authParams = this.createAuthParams();
-    return this.http.get(`${this.baseUrl}/creators?${authParams}`);
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/creators?${authParams}&limit=${limit}&offset=${offset}`);
   }
 
   getCreatorById(id:number): Observable<any> {
