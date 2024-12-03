@@ -3,7 +3,6 @@ import { MarvelService } from '../../servicios/marvel.service';
 import { MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { LoadingService } from '../../servicios/texto-spinner.service';
 import { SpinnerModule } from '../../spinner.module';
-import { NgxSpinnerComponent } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';  // Importa CommonModule
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-creadores',
   standalone: true,
-  imports: [SpinnerModule, NgxSpinnerComponent, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
+  imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
   templateUrl: './creadores.component.html',
   styleUrl: './creadores.component.scss'
 })

@@ -2,12 +2,11 @@ import { Component, inject } from '@angular/core';
 import { MarvelService } from '../../servicios/marvel.service';
 import { LoadingService } from '../../servicios/texto-spinner.service';
 import { SpinnerModule } from '../../spinner.module';
-import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [SpinnerModule, NgxSpinnerComponent],
+  imports: [SpinnerModule],
   templateUrl: './series.component.html',
   styleUrl: './series.component.scss'
 })
