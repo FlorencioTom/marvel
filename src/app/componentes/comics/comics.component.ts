@@ -68,7 +68,7 @@ export class ComicsComponent {
         this.comics = response.data.results;
       });
   }
-
+ 
   firstCall(){
     if(this.name === ''){
       this.backToAllComics();

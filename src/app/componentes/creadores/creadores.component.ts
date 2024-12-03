@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-creadores',
   standalone: true,
-  imports: [SpinnerModule, NgxSpinnerComponent, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
+  imports: [SpinnerModule, NgxSpinnerComponent, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
   templateUrl: './creadores.component.html',
   styleUrl: './creadores.component.scss'
 })
@@ -27,8 +27,6 @@ export class CreadoresComponent {
   @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
 
   creators: any[] = []; 
-  creator: any;
-  comics: any[] = []; // Aquí puedes almacenar los personajes
   currentPageIndex: number = 0;
   rows: number = 20;
   loadingText: string = this.loadingService.loadingText;
@@ -44,7 +42,6 @@ export class CreadoresComponent {
       this.loadingService.loadingText = 'Cargando creadores';
     });
     this.marvelService.getCreators(this.currentPageIndex, this.rows).subscribe(response => {
-      console.log(response);
       this.creators = response.data.results;
       this.total = response.data.total;
       console.log(this.creators);
@@ -58,15 +55,15 @@ export class CreadoresComponent {
       this.searchCreatorByName(event.page);
     }else{
       this.marvelService.getCreators(this.currentPageIndex, this.rows).subscribe(response => {
-        this.comics = response.data.results;
+        this.creators = response.data.results;
         this.searchByName = false;
       });
     }
   }
 
   searchCreatorByName(page: number){
-    this.marvelService.getComicsByTitle(page, this.rows, this.name).subscribe(response => {
-      this.comics = response.data.results;
+    this.marvelService.getCreatorsByName(page, this.rows, this.name).subscribe(response => {
+      this.creators = response.data.results;
     });
   }
 
@@ -76,8 +73,8 @@ export class CreadoresComponent {
     }else{
       this.currentPageIndex = 0;
       this.searchByName = true;
-      this.marvelService.getComicsByTitle(this.currentPageIndex, this.rows, this.name).subscribe(response => {
-        this.comics = response.data.results;
+      this.marvelService.getCreatorsByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
+        this.creators = response.data.results;
       });
     }
   }
@@ -92,6 +89,6 @@ export class CreadoresComponent {
   }
 
   goToCreator(id: number): void {
-    this.router.navigate(['/creator', id]);
+    this.router.navigate(['/creadores', id]);
   }
 } 

@@ -8,6 +8,8 @@ import { ComicsComponent } from './componentes/comics/comics.component';
 import { ComicComponent } from './componentes/comics/comic/comic.component';
 import { PersonajesComponent } from './componentes/personajes/personajes.component';
 import { PersonajeComponent } from './componentes/personajes/personaje/personaje.component';
+import { CreadorComponent } from './componentes/creadores/creador/creador.component';
+import { EventoComponent } from './componentes/eventos/evento/evento.component';
 
 export const routes: Routes = [
     { path: 'personajes',  component: PersonajesComponent},
@@ -15,7 +17,9 @@ export const routes: Routes = [
     { path: 'comics', component: ComicsComponent },
     { path: 'comics/:id',  component: ComicComponent},
     { path: 'creadores', component: CreadoresComponent },
+    { path: 'creadores/:id', component: CreadorComponent },
     { path: 'eventos', component:  EventosComponent},
+    { path: 'eventos/:id', component:  EventoComponent},
     { path: 'series', component:  SeriesComponent},
     { path: 'historias', component: HistoriasComponent },
     { path: '**', component: PersonajesComponent },

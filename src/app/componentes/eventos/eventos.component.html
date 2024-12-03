@@ -1,1 +1,24 @@
-<p>eventos works!</p>
+<div class="sub-menu">
+    <p-paginator
+        (onPageChange)="changePage($event)" 
+        [first]="currentPageIndex * rows" 
+        [rows]="rows" 
+        [totalRecords]="total" 
+         />
+         <p-iconField iconPosition="left">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
+        </p-iconField>
+        
+</div>
+<div class="container">
+    <div class="grid-container">
+        <div class="grid-item" *ngFor="let event of events" (click)="goToEvent(event.id)">
+            <img [src]="event.thumbnail.path+'.'+event.thumbnail.extension" [alt]="event.title">
+            <div class="item-name-container">
+                <p class="item-name">{{event.title}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+ 

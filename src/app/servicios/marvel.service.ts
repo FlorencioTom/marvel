@@ -105,6 +105,12 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/creators?${authParams}&limit=${limit}&offset=${offset}`);
   }
 
+  getCreatorsByName(page: number, limit:number, name: string): Observable<any> {
+    const authParams = this.createAuthParams();
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/creators?${authParams}&limit=${limit}&offset=${offset}&firstNameStartsWith=${name}`);
+  }
+
   getCreatorById(id:number): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/creators/${id}?${authParams}`);
@@ -130,14 +136,21 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/creators/${id}/stories?${authParams}`);
   }
 
-  getEvents(): Observable<any> {
+  getEvents(page: number, limit:number): Observable<any> {
     const authParams = this.createAuthParams();
-    return this.http.get(`${this.baseUrl}/events?${authParams}`);
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/events?${authParams}&limit=${limit}&offset=${offset}`);
   }
 
   getEventsById(id:number): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/events/${id}?${authParams}`);
+  }
+
+  getEventsByName(page: number, limit:number, name: string): Observable<any> {
+    const authParams = this.createAuthParams();
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/events?${authParams}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`);
   }
 
   getCharactersByEvent(id:number): Observable<any> {
