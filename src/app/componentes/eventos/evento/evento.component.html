@@ -1,13 +1,14 @@
 <div class="character" *ngIf="!error">
-    <h2 class="title">{{creador?.fullName}}</h2>
-   <div class="container-references">
+    <h2 class="title">{{event?.title}}</h2>
+    <p>{{event?.description}}</p>
+    <div class="container-references">
         <div class="containeer-img">
-            <img class="character-img" [src]="creador?.thumbnail?.path + '.' +creador?.thumbnail?.extension" alt="">
+            <img class="character-img" [src]="event?.thumbnail?.path + '.' +event?.thumbnail?.extension" alt="">
         </div>
         <div class="references">
             @if(comics.length > 0){
                 <div>
-                    <h3>Series</h3>
+                    <h3>Comics</h3>
                     @for(comic of comics; track $index){
                         <p class="link">{{comic.name}}</p>
                     }
@@ -29,21 +30,17 @@
                     }
                 </div>
             }
-            @if(events.length > 0){
+            @if(characters.length > 0){
                 <div>
-                    <h3>Events</h3>
-                    @for(event of events; track $index){
-                        <p class="link">{{event.name}}</p>
+                    <h3>Character</h3>
+                    @for(character of characters; track $index){
+                        <p class="link">{{character.name}}</p>
                     }
                 </div>
             }
-            <div *ngIf="events.length > 0">
-                <h3>Events</h3>
-                <a class="link" *ngFor="let enlace of events" href="">{{enlace.name}}</a>
-            </div>
         </div>  
     </div>
 </div>
 <div *ngIf="error" class="error">
-    <h1 class="error">We have no record of the character you are trying to search for.</h1>
+    <h1 class="error">We have no record of the event you are trying to search for.</h1>
 </div>

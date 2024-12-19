@@ -27,20 +27,21 @@ export class EventoComponent {
   stories: any = [];
   events: any = [];
   creators: any = [];
+  event: any = [];
   error:boolean = false;
   creador: any = [];
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     console.log(this.id);
-    this.marvelService.getCreatorById(this.id).subscribe(
+    this.marvelService.getEventsById(this.id).subscribe(
       response => {
         console.log(response.data.results);
-        this.creador = response.data.results[0];
-        this.comics = this.creador.comics.items;
-        this.series = this.creador.series.items;
-        this.stories = this.creador.stories.items;
-        this.events = this.creador.events.items;
+        this.event = response.data.results[0];
+        this.comics = this.event.comics.items;
+        this.series = this.event.series.items;
+        this.stories = this.event.stories.items;
+        this.characters = this.event.characters.items;
       }, error => {
         //console.error('Error fetching character:');
         this.error = true;
