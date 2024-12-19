@@ -43,7 +43,7 @@ export class HistoriasComponent implements OnInit {
 
       this.stories.forEach( x => {
         this.marvelService.getUriInfo(x.resourceURI).subscribe(response => {
-          console.log(response.data.results);
+          //console.log(response.data.results);
         });
       })
       //console.log(this.stories);

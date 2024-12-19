@@ -11,20 +11,52 @@
         <div class="references">
             <div *ngIf="comics.length > 0">
                 <h3>Comics</h3>
-                <a class="link" *ngFor="let enlace of comics" href="">{{enlace.name}}</a>
+                <div class="container-sub-items">
+                    @for(comic of arrComics; track $index){
+                      <div class="sub-items">
+                        <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="">
+                        <p>{{comic.title}}</p>
+                      </div>  
+                    }
+                </div>
+                <!-- <a class="link" *ngFor="let enlace of comics" href="">{{enlace.name}}</a> -->
             </div>
             <div *ngIf="series.length > 0">
                 <h3>Series</h3>
-                <a class="link" *ngFor="let enlace of series" href="">{{enlace.name}}</a>
-            </div>
-            <div *ngIf="stories.length > 0">
-                <h3>Stories</h3>
-                <a class="link" *ngFor="let enlace of stories" href="">{{enlace.name}}</a>
+                <div class="container-sub-items">
+                    @for(serie of arrSeries; track $index){
+                      <div class="sub-items">
+                        <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="">
+                        <p>{{serie.title}}</p>
+                      </div>  
+                    }
+                </div>
+                <!-- <a class="link" *ngFor="let enlace of series" href="">{{enlace.name}}</a> -->
             </div>
             <div *ngIf="events.length > 0">
                 <h3>Events</h3>
-                <a class="link" *ngFor="let enlace of events" href="">{{enlace.name}}</a>
+                <div class="container-sub-items">
+                    @for(event of arrEvents; track $index){
+                      <div class="sub-items">
+                        <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
+                        <p>{{event.title}}</p>
+                      </div>  
+                    }
+                </div>
+                <!-- <a class="link" *ngFor="let enlace of events" href="">{{enlace.name}}</a> -->
             </div>
+            <!-- <div *ngIf="stories.length > 0">
+                <h3>Stories</h3>
+                <div class="container-sub-items">
+                    @for(storie of arrStories; track $index){
+                      <div class="sub-items">
+                         <img [src]="storie?.thumbnail.path + '.' +storie?.thumbnail.extension" alt=""> 
+                        <p>{{storie.title}}</p>
+                      </div>  
+                    }
+                </div>
+                 <a class="link" *ngFor="let enlace of stories" href="">{{enlace.name}}</a>
+            </div>  -->
         </div>
     </div>
 </div>

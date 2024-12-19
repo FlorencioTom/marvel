@@ -16,6 +16,10 @@ export class PersonajeComponent implements OnInit {
   id!: string; 
   character: any;
   comics: any = [];
+  arrComics: any = [];
+  arrSeries: any = [];
+  arrEvents: any = [];
+  arrStories: any = [];
   series: any = [];
   stories: any = [];
   events: any = [];
@@ -28,12 +32,12 @@ export class PersonajeComponent implements OnInit {
     this.marvelService.getCharacterById(this.id).subscribe(
       response => {
         this.character = response.data.results[0];
-        console.log(this.character);
-        console.log(this.character.comics.collectionURI);
-        this.comics = this.character.comics.items; 
-        this.series = this.character.series.items;
+        this.handleComics();
+        this.handleSeries();
+        this.handleEvents();
+        // this.handleStories();
         this.stories = this.character.stories.items;
-        this.events = this.character.events.items;
+
         this.character.modified = this.formatDate(this.character.modified);
       }, error => {
         //console.error('Error fetching character:');
@@ -47,13 +51,62 @@ export class PersonajeComponent implements OnInit {
     });
   }
 
-  public formatDate(dateString:string) {
-    const date = new Date(dateString); // Convierte la cadena de fecha a un objeto Date
-    const year = date.getFullYear(); // Año (aaaa)
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes (mm) (sumamos 1 porque los meses en JS comienzan en 0)
-    const day = String(date.getDate()).padStart(2, '0'); // Día (dd)
+  public handleComics(){
+    this.comics = this.character.comics.items;
+    this.comics.forEach( (x: { resourceURI: string; }) => {
+      this.marvelService.getUriInfo(x.resourceURI).subscribe(response => {
+        this.arrComics.push(response.data.results[0]);
+      });
+    })     
+  }
 
-    return `${year}/${month}/${day}`; // Devuelve en el formato aaaa/mm/dd
+  public handleSeries(){
+    this.series = this.character.series.items;
+    this.series.forEach( (x: { resourceURI: string; }) => {
+      this.marvelService.getUriInfo(x.resourceURI).subscribe(response => {
+        this.arrSeries.push(response.data.results[0]);
+      });
+    }); 
+  }
+
+  public handleEvents(){
+    this.events = this.character.events.items;
+    this.events.forEach( (x: { resourceURI: string; }) => {
+      this.marvelService.getUriInfo(x.resourceURI).subscribe(response => {
+        this.arrEvents.push(response.data.results[0]);
+      });
+    });
+  }
+
+  // public handleStories(){
+  //   this.stories = this.character.stories.items;
+  //   //console.log(this.stories);
+  //   this.stories.forEach( (x: { resourceURI: string; }) => {
+  //     console.log(x.resourceURI);
+  //     this.marvelService.getUriInfo(x.resourceURI).subscribe(response => {
+  //       console.log(response.data.results[0]);
+  //       this.arrStories.push(response.data.results[0]);
+  //     });
+  //   }); 
+    
+  //   //console.log(this.arrStories);
+  // }
+
+  public formatDate(dateString:string) {
+    const date = new Date(dateString); 
+    const year = date.getFullYear(); 
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}/${month}/${day}`;
+  }
+
+  public ordenar(){
+
+  }
+
+  public filtrar(){
+
   }
 
   
