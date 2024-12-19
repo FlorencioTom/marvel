@@ -1,1 +1,23 @@
-<p>historias works!</p>
+<div class="sub-menu">
+    <p-paginator
+        (onPageChange)="changePage($event)" 
+        [first]="currentPageIndex * rows" 
+        [rows]="rows" 
+        [totalRecords]="total" 
+         />
+         <p-iconField iconPosition="left">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
+        </p-iconField>
+        
+</div>
+<div class="container">
+    <div class="grid-container">
+        <div class="grid-item" *ngFor="let storie of stories" (click)="goToStorie(storie.id)">
+            <!-- <img [src]="storie.thumbnail.path+'.'+storie.thumbnail.extension" [alt]="storie.title"> -->
+            <div class="item-name-container">
+                <p class="item-name">{{storie.title}}</p>
+            </div>
+        </div>
+    </div>
+</div>

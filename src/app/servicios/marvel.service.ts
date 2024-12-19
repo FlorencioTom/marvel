@@ -36,8 +36,6 @@ export class MarvelService {
     const offset = page * limit;
     return this.http.get(`${this.baseUrl}/characters?${authParams}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`);
   }
-  
-  
 
   getCharacterById(id:string): Observable<any> {
     const authParams = this.createAuthParams();
@@ -223,9 +221,10 @@ export class MarvelService {
     return this.http.get(`${this.baseUrl}/series?${authParams}&limit=${limit}&offset=${offset}&titleStartsWith=${name}`);
   }
 
-  getStories(): Observable<any> {
+  getStories(page: number, limit:number): Observable<any> {
     const authParams = this.createAuthParams();
-    return this.http.get(`${this.baseUrl}/stories?${authParams}`);
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/stories?${authParams}&limit=${limit}&offset=${offset}`);
   }
 
   getStoriesById(id:number): Observable<any> {
@@ -256,6 +255,12 @@ export class MarvelService {
   getSeriesByStories(id:number): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/stories/${id}/series?${authParams}`);
+  }
+
+  getStoriesByName(page: number, limit:number, name: string): Observable<any> {
+    const authParams = this.createAuthParams();
+    const offset = page * limit;
+    return this.http.get(`${this.baseUrl}/stories?${authParams}&limit=${limit}&offset=${offset}&titleStartsWith=${name}`);
   }
 
 }
