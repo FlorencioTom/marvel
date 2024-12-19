@@ -8,13 +8,13 @@ import { LoadingService } from '../../../servicios/texto-spinner.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-evento',
+  selector: 'app-serie',
   standalone: true,
   imports: [DropdownModule, FloatLabelModule, CommonModule],
-  templateUrl: './evento.component.html',
-  styleUrl: './evento.component.scss'
+  templateUrl: './serie.component.html',
+  styleUrl: './serie.component.scss'
 })
-export class EventoComponent {
+export class SerieComponent {
 
   public loadingService = inject(LoadingService);
 
@@ -27,21 +27,22 @@ export class EventoComponent {
   stories: any = [];
   events: any = [];
   creators: any = [];
-  event: any = [];
+  serie: any = [];
   error:boolean = false;
   creador: any = [];
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     console.log(this.id);
-    this.marvelService.getEventsById(this.id).subscribe(
+    this.marvelService.getSeriesById(this.id).subscribe(
       response => {
-        console.log(response.data.results);
-        this.event = response.data.results[0];
-        this.comics = this.event.comics.items;
-        this.series = this.event.series.items;
-        this.stories = this.event.stories.items;
-        this.characters = this.event.characters.items;
+        this.serie = response.data.results[0];
+        this.comics = this.serie.comics.items;
+        this.stories = this.serie.stories.items;
+        this.events = this.serie.events.items;
+        this.creators = this.serie.creators.items;
+        this.characters = this.serie.characters.items;
+        console.log(response.data.results, this.creators.length);
       }, error => {
         //console.error('Error fetching character:');
         this.error = true;
