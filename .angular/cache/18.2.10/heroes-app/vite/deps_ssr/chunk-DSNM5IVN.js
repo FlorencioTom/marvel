@@ -11,6 +11,9 @@ import {
   zindexutils
 } from "./chunk-SVVIDQHK.js";
 import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-BF2IJN4L.js";
+import {
   animate,
   animation,
   style,
@@ -18,9 +21,6 @@ import {
   trigger,
   useAnimation
 } from "./chunk-6AZUOZL6.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-BF2IJN4L.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -7726,4 +7726,4 @@ export {
   Dropdown,
   DropdownModule
 };
-//# sourceMappingURL=chunk-DQFZVTFS.js.map
+//# sourceMappingURL=chunk-DSNM5IVN.js.map

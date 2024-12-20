@@ -1,4 +1,8 @@
 import {
+  InputText,
+  InputTextModule
+} from "./chunk-KWQHSND4.js";
+import {
   AutoFocus,
   AutoFocusModule,
   BaseIcon,
@@ -10,10 +14,6 @@ import {
   SpinnerIcon,
   TimesIcon
 } from "./chunk-J5ZEDTUG.js";
-import {
-  InputText,
-  InputTextModule
-} from "./chunk-KWQHSND4.js";
 import {
   ObjectUtils,
   PrimeNGConfig,

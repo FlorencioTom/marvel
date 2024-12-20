@@ -1,3 +1,10 @@
+import { createRequire } from 'module';const require = createRequire(import.meta.url);
+import {
+  ArrayDataSource,
+  _RecycleViewRepeaterStrategy,
+  _VIEW_REPEATER_STRATEGY,
+  isDataSource
+} from "./chunk-DRBVAWHJ.js";
 import {
   BidiModule,
   Directionality,
@@ -13,11 +20,11 @@ import {
   getRtlScrollAxisType,
   hasModifierKey,
   supportsScrollBehavior
-} from "./chunk-ON36XJIR.js";
+} from "./chunk-5T5NI3VO.js";
 import {
   DOCUMENT,
   Location
-} from "./chunk-3GPHMYWF.js";
+} from "./chunk-DQZ2PILJ.js";
 import {
   ANIMATION_MODULE_TYPE,
   ApplicationRef,
@@ -49,6 +56,7 @@ import {
   booleanAttribute,
   forwardRef,
   inject,
+  require_operators,
   setClassMetadata,
   untracked,
   ɵɵInheritDefinitionFeature,
@@ -75,32 +83,15 @@ import {
   ɵɵqueryRefresh,
   ɵɵstyleProp,
   ɵɵviewQuery
-} from "./chunk-2IRPN5DT.js";
+} from "./chunk-TKQWSO4T.js";
 import {
-  ConnectableObservable,
-  Observable,
-  Subject,
-  Subscription,
-  animationFrameScheduler,
-  asapScheduler,
-  auditTime,
-  distinctUntilChanged,
-  filter,
-  fromEvent,
-  isObservable,
-  merge,
-  of,
-  pairwise,
-  shareReplay,
-  startWith,
-  switchMap,
-  takeUntil,
-  takeWhile
-} from "./chunk-66JPAEYR.js";
+  require_cjs
+} from "./chunk-2H3L6IVL.js";
 import {
   __spreadProps,
-  __spreadValues
-} from "./chunk-3OV72XIM.js";
+  __spreadValues,
+  __toESM
+} from "./chunk-NQ4HTGF6.js";
 
 // node_modules/@angular/cdk/fesm2022/portal.mjs
 function throwNullPortalError() {
@@ -649,367 +640,9 @@ var PortalModule = class _PortalModule {
   }], null, null);
 })();
 
-// node_modules/@angular/cdk/fesm2022/collections.mjs
-var DataSource = class {
-};
-function isDataSource(value) {
-  return value && typeof value.connect === "function" && !(value instanceof ConnectableObservable);
-}
-var ArrayDataSource = class extends DataSource {
-  constructor(_data) {
-    super();
-    this._data = _data;
-  }
-  connect() {
-    return isObservable(this._data) ? this._data : of(this._data);
-  }
-  disconnect() {
-  }
-};
-var _ViewRepeaterOperation;
-(function(_ViewRepeaterOperation2) {
-  _ViewRepeaterOperation2[_ViewRepeaterOperation2["REPLACED"] = 0] = "REPLACED";
-  _ViewRepeaterOperation2[_ViewRepeaterOperation2["INSERTED"] = 1] = "INSERTED";
-  _ViewRepeaterOperation2[_ViewRepeaterOperation2["MOVED"] = 2] = "MOVED";
-  _ViewRepeaterOperation2[_ViewRepeaterOperation2["REMOVED"] = 3] = "REMOVED";
-})(_ViewRepeaterOperation || (_ViewRepeaterOperation = {}));
-var _VIEW_REPEATER_STRATEGY = new InjectionToken("_ViewRepeater");
-var _RecycleViewRepeaterStrategy = class {
-  constructor() {
-    this.viewCacheSize = 20;
-    this._viewCache = [];
-  }
-  /** Apply changes to the DOM. */
-  applyChanges(changes, viewContainerRef, itemContextFactory, itemValueResolver, itemViewChanged) {
-    changes.forEachOperation((record, adjustedPreviousIndex, currentIndex) => {
-      let view;
-      let operation;
-      if (record.previousIndex == null) {
-        const viewArgsFactory = () => itemContextFactory(record, adjustedPreviousIndex, currentIndex);
-        view = this._insertView(viewArgsFactory, currentIndex, viewContainerRef, itemValueResolver(record));
-        operation = view ? _ViewRepeaterOperation.INSERTED : _ViewRepeaterOperation.REPLACED;
-      } else if (currentIndex == null) {
-        this._detachAndCacheView(adjustedPreviousIndex, viewContainerRef);
-        operation = _ViewRepeaterOperation.REMOVED;
-      } else {
-        view = this._moveView(adjustedPreviousIndex, currentIndex, viewContainerRef, itemValueResolver(record));
-        operation = _ViewRepeaterOperation.MOVED;
-      }
-      if (itemViewChanged) {
-        itemViewChanged({
-          context: view?.context,
-          operation,
-          record
-        });
-      }
-    });
-  }
-  detach() {
-    for (const view of this._viewCache) {
-      view.destroy();
-    }
-    this._viewCache = [];
-  }
-  /**
-   * Inserts a view for a new item, either from the cache or by creating a new
-   * one. Returns `undefined` if the item was inserted into a cached view.
-   */
-  _insertView(viewArgsFactory, currentIndex, viewContainerRef, value) {
-    const cachedView = this._insertViewFromCache(currentIndex, viewContainerRef);
-    if (cachedView) {
-      cachedView.context.$implicit = value;
-      return void 0;
-    }
-    const viewArgs = viewArgsFactory();
-    return viewContainerRef.createEmbeddedView(viewArgs.templateRef, viewArgs.context, viewArgs.index);
-  }
-  /** Detaches the view at the given index and inserts into the view cache. */
-  _detachAndCacheView(index, viewContainerRef) {
-    const detachedView = viewContainerRef.detach(index);
-    this._maybeCacheView(detachedView, viewContainerRef);
-  }
-  /** Moves view at the previous index to the current index. */
-  _moveView(adjustedPreviousIndex, currentIndex, viewContainerRef, value) {
-    const view = viewContainerRef.get(adjustedPreviousIndex);
-    viewContainerRef.move(view, currentIndex);
-    view.context.$implicit = value;
-    return view;
-  }
-  /**
-   * Cache the given detached view. If the cache is full, the view will be
-   * destroyed.
-   */
-  _maybeCacheView(view, viewContainerRef) {
-    if (this._viewCache.length < this.viewCacheSize) {
-      this._viewCache.push(view);
-    } else {
-      const index = viewContainerRef.indexOf(view);
-      if (index === -1) {
-        view.destroy();
-      } else {
-        viewContainerRef.remove(index);
-      }
-    }
-  }
-  /** Inserts a recycled view from the cache at the given index. */
-  _insertViewFromCache(index, viewContainerRef) {
-    const cachedView = this._viewCache.pop();
-    if (cachedView) {
-      viewContainerRef.insert(cachedView, index);
-    }
-    return cachedView || null;
-  }
-};
-var SelectionModel = class {
-  /** Selected values. */
-  get selected() {
-    if (!this._selected) {
-      this._selected = Array.from(this._selection.values());
-    }
-    return this._selected;
-  }
-  constructor(_multiple = false, initiallySelectedValues, _emitChanges = true, compareWith) {
-    this._multiple = _multiple;
-    this._emitChanges = _emitChanges;
-    this.compareWith = compareWith;
-    this._selection = /* @__PURE__ */ new Set();
-    this._deselectedToEmit = [];
-    this._selectedToEmit = [];
-    this.changed = new Subject();
-    if (initiallySelectedValues && initiallySelectedValues.length) {
-      if (_multiple) {
-        initiallySelectedValues.forEach((value) => this._markSelected(value));
-      } else {
-        this._markSelected(initiallySelectedValues[0]);
-      }
-      this._selectedToEmit.length = 0;
-    }
-  }
-  /**
-   * Selects a value or an array of values.
-   * @param values The values to select
-   * @return Whether the selection changed as a result of this call
-   * @breaking-change 16.0.0 make return type boolean
-   */
-  select(...values) {
-    this._verifyValueAssignment(values);
-    values.forEach((value) => this._markSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Deselects a value or an array of values.
-   * @param values The values to deselect
-   * @return Whether the selection changed as a result of this call
-   * @breaking-change 16.0.0 make return type boolean
-   */
-  deselect(...values) {
-    this._verifyValueAssignment(values);
-    values.forEach((value) => this._unmarkSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Sets the selected values
-   * @param values The new selected values
-   * @return Whether the selection changed as a result of this call
-   * @breaking-change 16.0.0 make return type boolean
-   */
-  setSelection(...values) {
-    this._verifyValueAssignment(values);
-    const oldValues = this.selected;
-    const newSelectedSet = new Set(values);
-    values.forEach((value) => this._markSelected(value));
-    oldValues.filter((value) => !newSelectedSet.has(this._getConcreteValue(value, newSelectedSet))).forEach((value) => this._unmarkSelected(value));
-    const changed = this._hasQueuedChanges();
-    this._emitChangeEvent();
-    return changed;
-  }
-  /**
-   * Toggles a value between selected and deselected.
-   * @param value The value to toggle
-   * @return Whether the selection changed as a result of this call
-   * @breaking-change 16.0.0 make return type boolean
-   */
-  toggle(value) {
-    return this.isSelected(value) ? this.deselect(value) : this.select(value);
-  }
-  /**
-   * Clears all of the selected values.
-   * @param flushEvent Whether to flush the changes in an event.
-   *   If false, the changes to the selection will be flushed along with the next event.
-   * @return Whether the selection changed as a result of this call
-   * @breaking-change 16.0.0 make return type boolean
-   */
-  clear(flushEvent = true) {
-    this._unmarkAll();
-    const changed = this._hasQueuedChanges();
-    if (flushEvent) {
-      this._emitChangeEvent();
-    }
-    return changed;
-  }
-  /**
-   * Determines whether a value is selected.
-   */
-  isSelected(value) {
-    return this._selection.has(this._getConcreteValue(value));
-  }
-  /**
-   * Determines whether the model does not have a value.
-   */
-  isEmpty() {
-    return this._selection.size === 0;
-  }
-  /**
-   * Determines whether the model has a value.
-   */
-  hasValue() {
-    return !this.isEmpty();
-  }
-  /**
-   * Sorts the selected values based on a predicate function.
-   */
-  sort(predicate) {
-    if (this._multiple && this.selected) {
-      this._selected.sort(predicate);
-    }
-  }
-  /**
-   * Gets whether multiple values can be selected.
-   */
-  isMultipleSelection() {
-    return this._multiple;
-  }
-  /** Emits a change event and clears the records of selected and deselected values. */
-  _emitChangeEvent() {
-    this._selected = null;
-    if (this._selectedToEmit.length || this._deselectedToEmit.length) {
-      this.changed.next({
-        source: this,
-        added: this._selectedToEmit,
-        removed: this._deselectedToEmit
-      });
-      this._deselectedToEmit = [];
-      this._selectedToEmit = [];
-    }
-  }
-  /** Selects a value. */
-  _markSelected(value) {
-    value = this._getConcreteValue(value);
-    if (!this.isSelected(value)) {
-      if (!this._multiple) {
-        this._unmarkAll();
-      }
-      if (!this.isSelected(value)) {
-        this._selection.add(value);
-      }
-      if (this._emitChanges) {
-        this._selectedToEmit.push(value);
-      }
-    }
-  }
-  /** Deselects a value. */
-  _unmarkSelected(value) {
-    value = this._getConcreteValue(value);
-    if (this.isSelected(value)) {
-      this._selection.delete(value);
-      if (this._emitChanges) {
-        this._deselectedToEmit.push(value);
-      }
-    }
-  }
-  /** Clears out the selected values. */
-  _unmarkAll() {
-    if (!this.isEmpty()) {
-      this._selection.forEach((value) => this._unmarkSelected(value));
-    }
-  }
-  /**
-   * Verifies the value assignment and throws an error if the specified value array is
-   * including multiple values while the selection model is not supporting multiple values.
-   */
-  _verifyValueAssignment(values) {
-    if (values.length > 1 && !this._multiple && (typeof ngDevMode === "undefined" || ngDevMode)) {
-      throw getMultipleValuesInSingleSelectionError();
-    }
-  }
-  /** Whether there are queued up change to be emitted. */
-  _hasQueuedChanges() {
-    return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
-  }
-  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
-  _getConcreteValue(inputValue, selection) {
-    if (!this.compareWith) {
-      return inputValue;
-    } else {
-      selection = selection ?? this._selection;
-      for (let selectedValue of selection) {
-        if (this.compareWith(inputValue, selectedValue)) {
-          return selectedValue;
-        }
-      }
-      return inputValue;
-    }
-  }
-};
-function getMultipleValuesInSingleSelectionError() {
-  return Error("Cannot pass multiple values into SelectionModel with single-value mode.");
-}
-var UniqueSelectionDispatcher = class _UniqueSelectionDispatcher {
-  constructor() {
-    this._listeners = [];
-  }
-  /**
-   * Notify other items that selection for the given name has been set.
-   * @param id ID of the item.
-   * @param name Name of the item.
-   */
-  notify(id, name) {
-    for (let listener of this._listeners) {
-      listener(id, name);
-    }
-  }
-  /**
-   * Listen for future changes to item selection.
-   * @return Function used to deregister listener
-   */
-  listen(listener) {
-    this._listeners.push(listener);
-    return () => {
-      this._listeners = this._listeners.filter((registered) => {
-        return listener !== registered;
-      });
-    };
-  }
-  ngOnDestroy() {
-    this._listeners = [];
-  }
-  static {
-    this.ɵfac = function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _UniqueSelectionDispatcher)();
-    };
-  }
-  static {
-    this.ɵprov = ɵɵdefineInjectable({
-      token: _UniqueSelectionDispatcher,
-      factory: _UniqueSelectionDispatcher.ɵfac,
-      providedIn: "root"
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UniqueSelectionDispatcher, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
 // node_modules/@angular/cdk/fesm2022/scrolling.mjs
+var import_rxjs = __toESM(require_cjs(), 1);
+var import_operators = __toESM(require_operators(), 1);
 var _c0 = ["contentWrapper"];
 var _c1 = ["*"];
 var VIRTUAL_SCROLL_STRATEGY = new InjectionToken("VIRTUAL_SCROLL_STRATEGY");
@@ -1020,8 +653,8 @@ var FixedSizeVirtualScrollStrategy = class {
    * @param maxBufferPx The amount of buffer (in pixels) to render when rendering more.
    */
   constructor(itemSize, minBufferPx, maxBufferPx) {
-    this._scrolledIndexChange = new Subject();
-    this.scrolledIndexChange = this._scrolledIndexChange.pipe(distinctUntilChanged());
+    this._scrolledIndexChange = new import_rxjs.Subject();
+    this.scrolledIndexChange = this._scrolledIndexChange.pipe((0, import_operators.distinctUntilChanged)());
     this._viewport = null;
     this._itemSize = itemSize;
     this._minBufferPx = minBufferPx;
@@ -1224,7 +857,7 @@ var ScrollDispatcher = class _ScrollDispatcher {
   constructor(_ngZone, _platform, document2) {
     this._ngZone = _ngZone;
     this._platform = _platform;
-    this._scrolled = new Subject();
+    this._scrolled = new import_rxjs.Subject();
     this._globalSubscription = null;
     this._scrolledCount = 0;
     this.scrollContainers = /* @__PURE__ */ new Map();
@@ -1263,13 +896,13 @@ var ScrollDispatcher = class _ScrollDispatcher {
    */
   scrolled(auditTimeInMs = DEFAULT_SCROLL_TIME) {
     if (!this._platform.isBrowser) {
-      return of();
+      return (0, import_rxjs.of)();
     }
-    return new Observable((observer) => {
+    return new import_rxjs.Observable((observer) => {
       if (!this._globalSubscription) {
         this._addGlobalListener();
       }
-      const subscription = auditTimeInMs > 0 ? this._scrolled.pipe(auditTime(auditTimeInMs)).subscribe(observer) : this._scrolled.subscribe(observer);
+      const subscription = auditTimeInMs > 0 ? this._scrolled.pipe((0, import_operators.auditTime)(auditTimeInMs)).subscribe(observer) : this._scrolled.subscribe(observer);
       this._scrolledCount++;
       return () => {
         subscription.unsubscribe();
@@ -1293,7 +926,7 @@ var ScrollDispatcher = class _ScrollDispatcher {
    */
   ancestorScrolled(elementOrElementRef, auditTimeInMs) {
     const ancestors = this.getAncestorScrollContainers(elementOrElementRef);
-    return this.scrolled(auditTimeInMs).pipe(filter((target) => {
+    return this.scrolled(auditTimeInMs).pipe((0, import_operators.filter)((target) => {
       return !target || ancestors.indexOf(target) > -1;
     }));
   }
@@ -1326,7 +959,7 @@ var ScrollDispatcher = class _ScrollDispatcher {
   _addGlobalListener() {
     this._globalSubscription = this._ngZone.runOutsideAngular(() => {
       const window2 = this._getWindow();
-      return fromEvent(window2.document, "scroll").subscribe(() => this._scrolled.next());
+      return (0, import_rxjs.fromEvent)(window2.document, "scroll").subscribe(() => this._scrolled.next());
     });
   }
   /** Cleans up the global scroll listener. */
@@ -1375,8 +1008,8 @@ var CdkScrollable = class _CdkScrollable {
     this.scrollDispatcher = scrollDispatcher;
     this.ngZone = ngZone;
     this.dir = dir;
-    this._destroyed = new Subject();
-    this._elementScrolled = new Observable((observer) => this.ngZone.runOutsideAngular(() => fromEvent(this.elementRef.nativeElement, "scroll").pipe(takeUntil(this._destroyed)).subscribe(observer)));
+    this._destroyed = new import_rxjs.Subject();
+    this._elementScrolled = new import_rxjs.Observable((observer) => this.ngZone.runOutsideAngular(() => (0, import_rxjs.fromEvent)(this.elementRef.nativeElement, "scroll").pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe(observer)));
   }
   ngOnInit() {
     this.scrollDispatcher.register(this);
@@ -1525,7 +1158,7 @@ var DEFAULT_RESIZE_TIME = 20;
 var ViewportRuler = class _ViewportRuler {
   constructor(_platform, ngZone, document2) {
     this._platform = _platform;
-    this._change = new Subject();
+    this._change = new import_rxjs.Subject();
     this._changeListener = (event) => {
       this._change.next(event);
     };
@@ -1602,7 +1235,7 @@ var ViewportRuler = class _ViewportRuler {
    * @param throttleTime Time in milliseconds to throttle the stream.
    */
   change(throttleTime = DEFAULT_RESIZE_TIME) {
-    return throttleTime > 0 ? this._change.pipe(auditTime(throttleTime)) : this._change;
+    return throttleTime > 0 ? this._change.pipe((0, import_operators.auditTime)(throttleTime)) : this._change;
   }
   /** Use defaultView of injected document if available or fallback to global window reference */
   _getWindow() {
@@ -1697,7 +1330,7 @@ var CdkVirtualScrollable = class _CdkVirtualScrollable extends CdkScrollable {
 function rangesEqual(r1, r2) {
   return r1.start == r2.start && r1.end == r2.end;
 }
-var SCROLL_SCHEDULER = typeof requestAnimationFrame !== "undefined" ? animationFrameScheduler : asapScheduler;
+var SCROLL_SCHEDULER = typeof requestAnimationFrame !== "undefined" ? import_rxjs.animationFrameScheduler : import_rxjs.asapScheduler;
 var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtualScrollable {
   /** The direction the viewport scrolls. */
   get orientation() {
@@ -1716,11 +1349,11 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
     this._scrollStrategy = _scrollStrategy;
     this.scrollable = scrollable;
     this._platform = inject(Platform);
-    this._detachedSubject = new Subject();
-    this._renderedRangeSubject = new Subject();
+    this._detachedSubject = new import_rxjs.Subject();
+    this._renderedRangeSubject = new import_rxjs.Subject();
     this._orientation = "vertical";
     this.appendOnly = false;
-    this.scrolledIndexChange = new Observable((observer) => this._scrollStrategy.scrolledIndexChange.subscribe((index) => Promise.resolve().then(() => this.ngZone.run(() => observer.next(index)))));
+    this.scrolledIndexChange = new import_rxjs.Observable((observer) => this._scrollStrategy.scrolledIndexChange.subscribe((index) => Promise.resolve().then(() => this.ngZone.run(() => observer.next(index)))));
     this.renderedRangeStream = this._renderedRangeSubject;
     this._totalContentSize = 0;
     this._totalContentWidth = "";
@@ -1735,7 +1368,7 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
     this._renderedContentOffsetNeedsRewrite = false;
     this._isChangeDetectionPending = false;
     this._runAfterChangeDetection = [];
-    this._viewportChanges = Subscription.EMPTY;
+    this._viewportChanges = import_rxjs.Subscription.EMPTY;
     this._injector = inject(Injector);
     this._isDestroyed = false;
     if (!_scrollStrategy && (typeof ngDevMode === "undefined" || ngDevMode)) {
@@ -1761,15 +1394,15 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
       this._scrollStrategy.attach(this);
       this.scrollable.elementScrolled().pipe(
         // Start off with a fake scroll event so we properly detect our initial position.
-        startWith(null),
+        (0, import_operators.startWith)(null),
         // Collect multiple events into one until the next animation frame. This way if
         // there are multiple scroll events in the same frame we only need to recheck
         // our layout once.
-        auditTime(0, SCROLL_SCHEDULER),
+        (0, import_operators.auditTime)(0, SCROLL_SCHEDULER),
         // Usually `elementScrolled` is completed when the scrollable is destroyed, but
         // that may not be the case if a `CdkVirtualScrollableElement` is used so we have
         // to unsubscribe here just in case.
-        takeUntil(this._destroyed)
+        (0, import_operators.takeUntil)(this._destroyed)
       ).subscribe(() => this._scrollStrategy.onContentScrolled());
       this._markChangeDetectionNeeded();
     }));
@@ -1790,7 +1423,7 @@ var CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtua
     }
     this.ngZone.runOutsideAngular(() => {
       this._forOf = forOf;
-      this._forOf.dataStream.pipe(takeUntil(this._detachedSubject)).subscribe((data) => {
+      this._forOf.dataStream.pipe((0, import_operators.takeUntil)(this._detachedSubject)).subscribe((data) => {
         const newLength = data.length;
         if (newLength !== this._dataLength) {
           this._dataLength = newLength;
@@ -2161,7 +1794,7 @@ var CdkVirtualForOf = class _CdkVirtualForOf {
     if (isDataSource(value)) {
       this._dataSourceChanges.next(value);
     } else {
-      this._dataSourceChanges.next(new ArrayDataSource(isObservable(value) ? value : Array.from(value || [])));
+      this._dataSourceChanges.next(new ArrayDataSource((0, import_rxjs.isObservable)(value) ? value : Array.from(value || [])));
     }
   }
   /**
@@ -2198,28 +1831,28 @@ var CdkVirtualForOf = class _CdkVirtualForOf {
     this._differs = _differs;
     this._viewRepeater = _viewRepeater;
     this._viewport = _viewport;
-    this.viewChange = new Subject();
-    this._dataSourceChanges = new Subject();
+    this.viewChange = new import_rxjs.Subject();
+    this._dataSourceChanges = new import_rxjs.Subject();
     this.dataStream = this._dataSourceChanges.pipe(
       // Start off with null `DataSource`.
-      startWith(null),
+      (0, import_operators.startWith)(null),
       // Bundle up the previous and current data sources so we can work with both.
-      pairwise(),
+      (0, import_operators.pairwise)(),
       // Use `_changeDataSource` to disconnect from the previous data source and connect to the
       // new one, passing back a stream of data changes which we run through `switchMap` to give
       // us a data stream that emits the latest data from whatever the current `DataSource` is.
-      switchMap(([prev, cur]) => this._changeDataSource(prev, cur)),
+      (0, import_operators.switchMap)(([prev, cur]) => this._changeDataSource(prev, cur)),
       // Replay the last emitted data when someone subscribes.
-      shareReplay(1)
+      (0, import_operators.shareReplay)(1)
     );
     this._differ = null;
     this._needsUpdate = false;
-    this._destroyed = new Subject();
+    this._destroyed = new import_rxjs.Subject();
     this.dataStream.subscribe((data) => {
       this._data = data;
       this._onRenderedDataChange();
     });
-    this._viewport.renderedRangeStream.pipe(takeUntil(this._destroyed)).subscribe((range) => {
+    this._viewport.renderedRangeStream.pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe((range) => {
       this._renderedRange = range;
       if (this.viewChange.observers.length) {
         ngZone.run(() => this.viewChange.next(this._renderedRange));
@@ -2299,7 +1932,7 @@ var CdkVirtualForOf = class _CdkVirtualForOf {
       oldDs.disconnect(this);
     }
     this._needsUpdate = true;
-    return newDs ? newDs.connect(this) : of();
+    return newDs ? newDs.connect(this) : (0, import_rxjs.of)();
   }
   /** Update the `CdkVirtualForOfContext` for all views. */
   _updateContext() {
@@ -2477,7 +2110,7 @@ var CdkVirtualScrollableElement = class _CdkVirtualScrollableElement extends Cdk
 var CdkVirtualScrollableWindow = class _CdkVirtualScrollableWindow extends CdkVirtualScrollable {
   constructor(scrollDispatcher, ngZone, dir) {
     super(new ElementRef(document.documentElement), scrollDispatcher, ngZone, dir);
-    this._elementScrolled = new Observable((observer) => this.ngZone.runOutsideAngular(() => fromEvent(document, "scroll").pipe(takeUntil(this._destroyed)).subscribe(observer)));
+    this._elementScrolled = new import_rxjs.Observable((observer) => this.ngZone.runOutsideAngular(() => (0, import_rxjs.fromEvent)(document, "scroll").pipe((0, import_operators.takeUntil)(this._destroyed)).subscribe(observer)));
   }
   measureBoundingClientRectWithScrollOffset(from) {
     return this.getElementRef().nativeElement.getBoundingClientRect()[from];
@@ -2577,6 +2210,8 @@ var ScrollingModule = class _ScrollingModule {
 })();
 
 // node_modules/@angular/cdk/fesm2022/overlay.mjs
+var import_operators2 = __toESM(require_operators(), 1);
+var import_rxjs2 = __toESM(require_cjs(), 1);
 var scrollBehaviorSupported = supportsScrollBehavior();
 var BlockScrollStrategy = class {
   constructor(_viewportRuler, document2) {
@@ -2666,7 +2301,7 @@ var CloseScrollStrategy = class {
     if (this._scrollSubscription) {
       return;
     }
-    const stream = this._scrollDispatcher.scrolled(0).pipe(filter((scrollable) => {
+    const stream = this._scrollDispatcher.scrolled(0).pipe((0, import_operators2.filter)((scrollable) => {
       return !scrollable || !this._overlayRef.overlayElement.contains(scrollable.getElementRef().nativeElement);
     }));
     if (this._config && this._config.threshold && this._config.threshold > 1) {
@@ -3176,17 +2811,17 @@ var OverlayRef = class {
     this._animationsDisabled = _animationsDisabled;
     this._injector = _injector;
     this._backdropElement = null;
-    this._backdropClick = new Subject();
-    this._attachments = new Subject();
-    this._detachments = new Subject();
-    this._locationChanges = Subscription.EMPTY;
+    this._backdropClick = new import_rxjs2.Subject();
+    this._attachments = new import_rxjs2.Subject();
+    this._detachments = new import_rxjs2.Subject();
+    this._locationChanges = import_rxjs2.Subscription.EMPTY;
     this._backdropClickHandler = (event) => this._backdropClick.next(event);
     this._backdropTransitionendHandler = (event) => {
       this._disposeBackdrop(event.target);
     };
-    this._keydownEvents = new Subject();
-    this._outsidePointerEvents = new Subject();
-    this._renders = new Subject();
+    this._keydownEvents = new import_rxjs2.Subject();
+    this._outsidePointerEvents = new import_rxjs2.Subject();
+    this._renders = new import_rxjs2.Subject();
     if (_config.scrollStrategy) {
       this._scrollStrategy = _config.scrollStrategy;
       this._scrollStrategy.attach(this);
@@ -3496,7 +3131,7 @@ var OverlayRef = class {
   /** Detaches the overlay content next time the zone stabilizes. */
   _detachContentWhenEmpty() {
     this._ngZone.runOutsideAngular(() => {
-      const subscription = this._renders.pipe(takeUntil(merge(this._attachments, this._detachments))).subscribe(() => {
+      const subscription = this._renders.pipe((0, import_operators2.takeUntil)((0, import_rxjs2.merge)(this._attachments, this._detachments))).subscribe(() => {
         if (!this._pane || !this._host || this._pane.children.length === 0) {
           if (this._pane && this._config.panelClass) {
             this._toggleClasses(this._pane, this._config.panelClass, false);
@@ -3560,8 +3195,8 @@ var FlexibleConnectedPositionStrategy = class {
     this._viewportMargin = 0;
     this._scrollables = [];
     this._preferredPositions = [];
-    this._positionChanges = new Subject();
-    this._resizeSubscription = Subscription.EMPTY;
+    this._positionChanges = new import_rxjs2.Subject();
+    this._resizeSubscription = import_rxjs2.Subscription.EMPTY;
     this._offsetX = 0;
     this._offsetY = 0;
     this._appliedPanelClasses = [];
@@ -4830,10 +4465,10 @@ var CdkConnectedOverlay = class _CdkConnectedOverlay {
   constructor(_overlay, templateRef, viewContainerRef, scrollStrategyFactory, _dir) {
     this._overlay = _overlay;
     this._dir = _dir;
-    this._backdropSubscription = Subscription.EMPTY;
-    this._attachSubscription = Subscription.EMPTY;
-    this._detachSubscription = Subscription.EMPTY;
-    this._positionSubscription = Subscription.EMPTY;
+    this._backdropSubscription = import_rxjs2.Subscription.EMPTY;
+    this._attachSubscription = import_rxjs2.Subscription.EMPTY;
+    this._detachSubscription = import_rxjs2.Subscription.EMPTY;
+    this._positionSubscription = import_rxjs2.Subscription.EMPTY;
     this._disposeOnNavigation = false;
     this._ngZone = inject(NgZone);
     this.viewportMargin = 0;
@@ -4998,7 +4633,7 @@ var CdkConnectedOverlay = class _CdkConnectedOverlay {
     }
     this._positionSubscription.unsubscribe();
     if (this.positionChange.observers.length > 0) {
-      this._positionSubscription = this._position.positionChanges.pipe(takeWhile(() => this.positionChange.observers.length > 0)).subscribe((position) => {
+      this._positionSubscription = this._position.positionChanges.pipe((0, import_operators2.takeWhile)(() => this.positionChange.observers.length > 0)).subscribe((position) => {
         this._ngZone.run(() => this.positionChange.emit(position));
         if (this.positionChange.observers.length === 0) {
           this._positionSubscription.unsubscribe();
@@ -5341,7 +4976,6 @@ export {
   ComponentPortal,
   TemplatePortal,
   DomPortalOutlet,
-  SelectionModel,
   ScrollDispatcher,
   ViewportRuler,
   CdkScrollableModule,
@@ -5351,4 +4985,4 @@ export {
   CdkConnectedOverlay,
   OverlayModule
 };
-//# sourceMappingURL=chunk-BLCO4WOV.js.map
+//# sourceMappingURL=chunk-E7HYMRDJ.js.map

@@ -9,11 +9,30 @@
             <img class="character-img" [src]="character?.thumbnail.path + '.' +character?.thumbnail.extension" alt="">
         </div>
         <div class="references">
+            <div class="title-section">
+              <h3 (click)="handleComics()" class="example-ripple-container" matRipple
+              [matRippleCentered]="centered"
+              [matRippleDisabled]="disabled"
+              [matRippleUnbounded]="unbounded"
+              [matRippleRadius]="radius"
+              [matRippleColor]="color"
+              [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}"
+              >Comics</h3>
+              @if(!isComicsEmpty){
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                  <mat-button-toggle value="bold">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                  </mat-button-toggle>
+                  <mat-button-toggle value="italic">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="calendar_today"></mat-icon>
+                  </mat-button-toggle>
+                </mat-button-toggle-group>
+              }
+            </div>
             <div *ngIf="comics.length > 0">
-                <h3>Comics</h3>
                 <div class="container-sub-items">
                     @for(comic of arrComics; track $index){
-                      <div class="sub-items">
+                      <div class="sub-items animate__animated animate__fadeIn">
                         <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="">
                         <p>{{comic.title}}</p>
                       </div>  
