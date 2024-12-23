@@ -31,10 +31,10 @@ export class ComicComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.id);
+    //console.log(this.id);
     this.marvelService.getComicById(this.id).subscribe(
       response => {
-        console.log(response.data.results);
+        //console.log(response.data.results);
         this.comic = response.data.results[0];
         this.characters = this.comic.characters.items;
         this.series = this.comic.series;

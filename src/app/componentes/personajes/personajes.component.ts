@@ -40,7 +40,7 @@ export class PersonajesComponent implements OnInit {
     this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
       this.characters = response.data.results;
       this.total = response.data.total;
-      console.log(this.characters);
+      //console.log(this.characters);
       /*this.characters.forEach(x => {
         if(x.thumbnail.path.includes('not_available')){
           x.thumbnail.path = 'https://placehold.co/729x729?text=Sorry,+we+have+no+image+of+this+hero'
@@ -52,7 +52,7 @@ export class PersonajesComponent implements OnInit {
 
   changePage(event: any){
     this.currentPageIndex = event.page;
-    console.log(this.currentPageIndex);
+    //console.log(this.currentPageIndex);
     if(this.searchByName){
       this.searCharacterByName(event.page);
     }else{

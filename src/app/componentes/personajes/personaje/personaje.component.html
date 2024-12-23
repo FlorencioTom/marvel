@@ -11,21 +11,17 @@
         <div class="references">
             <div class="title-section">
               <h3 (click)="handleComics()" class="example-ripple-container" matRipple
-              [matRippleCentered]="centered"
-              [matRippleDisabled]="disabled"
-              [matRippleUnbounded]="unbounded"
-              [matRippleRadius]="radius"
-              [matRippleColor]="color"
-              [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}"
-              >Comics</h3>
+              [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+              [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}">Comics</h3>
               @if(!isComicsEmpty){
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                  <mat-button-toggle value="bold">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
+                  <mat-button-toggle value="bold" (click)="ordenar(arrComics,'title')">
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
-                  </mat-button-toggle>
-                  <mat-button-toggle value="italic">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="calendar_today"></mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+                    @if(toggleName){
+                      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
+                    }@else{
+                      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+                    }
                   </mat-button-toggle>
                 </mat-button-toggle-group>
               }
@@ -39,10 +35,25 @@
                       </div>  
                     }
                 </div>
-                <!-- <a class="link" *ngFor="let enlace of comics" href="">{{enlace.name}}</a> -->
+            </div>
+            <div class="title-section">
+              <h3 (click)="handleSeries()" class="example-ripple-container" matRipple
+              [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+              [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Series</h3>
+              @if(!isSeriesEmpty){
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
+                  <mat-button-toggle value="bold" >
+                    <mat-icon aria-hidden="false" (click)="ordenar(arrSeries, 'title')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                    @if(toggleName){
+                      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
+                    }@else{
+                      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+                    }
+                  </mat-button-toggle>
+                </mat-button-toggle-group>
+              }
             </div>
             <div *ngIf="series.length > 0">
-                <h3>Series</h3>
                 <div class="container-sub-items">
                     @for(serie of arrSeries; track $index){
                       <div class="sub-items">
@@ -51,32 +62,32 @@
                       </div>  
                     }
                 </div>
-                <!-- <a class="link" *ngFor="let enlace of series" href="">{{enlace.name}}</a> -->
             </div>
-            <div *ngIf="events.length > 0">
-                <h3>Events</h3>
-                <div class="container-sub-items">
-                    @for(event of arrEvents; track $index){
-                      <div class="sub-items">
-                        <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
-                        <p>{{event.title}}</p>
-                      </div>  
-                    }
-                </div>
-                <!-- <a class="link" *ngFor="let enlace of events" href="">{{enlace.name}}</a> -->
-            </div>
-            <!-- <div *ngIf="stories.length > 0">
-                <h3>Stories</h3>
-                <div class="container-sub-items">
-                    @for(storie of arrStories; track $index){
-                      <div class="sub-items">
-                         <img [src]="storie?.thumbnail.path + '.' +storie?.thumbnail.extension" alt=""> 
-                        <p>{{storie.title}}</p>
-                      </div>  
-                    }
-                </div>
-                 <a class="link" *ngFor="let enlace of stories" href="">{{enlace.name}}</a>
-            </div>  -->
+            <div class="title-section">
+              <h3 (click)="handleEvents()" class="example-ripple-container" matRipple
+                [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Events</h3>
+                @if(!isEventsEmpty){
+                  <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
+                    <mat-button-toggle value="bold" >
+                      <mat-icon aria-hidden="false" (click)="ordenar(arrEvents, 'title')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                      @if(toggleName){
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
+                      }@else{
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+                      }
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
+                }
+              </div>
+              <div class="container-sub-items">
+                  @for(event of arrEvents; track $index){
+                    <div class="sub-items">
+                      <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
+                      <p>{{event.title}}</p>
+                    </div>  
+                  }
+              </div>
         </div>
     </div>
 </div>

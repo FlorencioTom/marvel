@@ -44,14 +44,14 @@ export class ComicsComponent {
     this.marvelService.getComics(this.currentPageIndex, this.rows).subscribe(response => {
       this.comics = response.data.results;
       this.total = response.data.total;
-      console.log(this.comics);
-      console.log(response);
+      //console.log(this.comics);
+      //console.log(response);
     });
   }
 
   changePage(event: any){
     this.currentPageIndex = event.page;
-    console.log(this.currentPageIndex);
+    //console.log(this.currentPageIndex);
     if(this.searchByName){
       this.searchComicByName(event.page);
     }else{
