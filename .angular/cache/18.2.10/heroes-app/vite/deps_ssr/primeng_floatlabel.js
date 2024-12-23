@@ -1,10 +1,10 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
-  SharedModule
-} from "./chunk-SVVIDQHK.js";
-import {
   RouterModule
 } from "./chunk-AJCWDVTT.js";
+import {
+  SharedModule
+} from "./chunk-CCCNXAOE.js";
 import "./chunk-NBDRSUDG.js";
 import "./chunk-NLAQVFGP.js";
 import {

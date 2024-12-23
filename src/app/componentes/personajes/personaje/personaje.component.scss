@@ -159,10 +159,33 @@
   }
   
 }
-.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
-    width: 0px;
+.container-input{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    input{
+        padding: 5px 15px 5px 15px;
+        border-radius: 10px;
+        background-color: #a9c0f5;
+        border: none; 
+        color:#005cbb;
+        font: 400 1.25rem / 2.75rem Roboto, sans-serif;
+        height: 40px;
+        width: 100px;
+        border-radius: 20px;
+        box-sizing: content-box;
+        &:focus{
+            outline: 2px solid #005cbb;
+        }
+        &::placeholder{
+            font-size: 12px;
+        }
+    }
+    button{
+        position: absolute;
+        right: 2px;
+    }
 }
-  
-  
 
   

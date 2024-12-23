@@ -10,11 +10,17 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import { firstValueFrom } from 'rxjs';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-personaje',
   standalone: true,
-  imports: [DropdownModule, FloatLabelModule, CommonModule, MatProgressSpinnerModule, MatRippleModule, MatButtonToggleModule, MatIconModule ],
+  imports: [DropdownModule, FloatLabelModule, CommonModule, MatProgressSpinnerModule,
+     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule, 
+     FormsModule, MatButtonModule],
   templateUrl: './personaje.component.html',
   styleUrl: './personaje.component.scss'
 })
@@ -36,7 +42,14 @@ export class PersonajeComponent implements OnInit {
   radius: number = 20;
   color: string = '#d7e3ff85';
   toggleDate: boolean = true;
-  toggleName: boolean = true;
+  comicValue: string = '';
+  serieValue: string = '';
+  eventValue: string = '';
+  public toggleOrder: { [key: string]: boolean } = {
+    comics: true, // Para los cómics
+    series: true, // Para las series
+    events: true  // Para los eventos (si es necesario)
+  };
 
   constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
 
@@ -145,17 +158,18 @@ export class PersonajeComponent implements OnInit {
     return `${year}/${month}/${day}`;
   }
 
-  public ordenar(arr:any ,campo:string){
+  public ordenar(arr:any ,campo:string, seccion:string){
+    const key = campo;
     if(campo === 'date'){
       this.toggleDate = !this.toggleDate;
     }
     if(campo === 'title'){
-      if(!this.toggleName){
+      if(!this.toggleOrder[seccion]){
         this.reordenar(arr, 'title');
       }else{
         this.reordenar(arr, 'title', true);
       }
-      this.toggleName = !this.toggleName;
+      this.toggleOrder[seccion] = !this.toggleOrder[seccion];
     }
   }
 
@@ -168,7 +182,17 @@ export class PersonajeComponent implements OnInit {
         : valorA.localeCompare(valorB); 
     });
   }
-  
 
+  public filtro(e:any, arr:any, campo:string){
+    let input = e.target.value.toLowerCase();
+    arr.forEach( (x:any) => {
+      if(x[campo].toLowerCase().includes(input)){
+        x.visible = true;
+      }else{
+        x.visible = false;
+      }
+    });
+    console.log(arr);
+  }
   
 }

@@ -1,6 +1,6 @@
 import {
   SharedModule
-} from "./chunk-AQ4PTQJY.js";
+} from "./chunk-FO7PJAA4.js";
 import {
   CommonModule,
   NgClass

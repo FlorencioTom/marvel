@@ -14,10 +14,13 @@
               [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
               [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}">Comics</h3>
               @if(!isComicsEmpty){
+                <div class="container-input">
+                  <input type="text" class="custom-caret-thick" [(ngModel)]="comicValue" (input)="filtro($event, arrComics, 'title')" placeholder="Busca un comic..">
+                </div>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
-                  <mat-button-toggle value="bold" (click)="ordenar(arrComics,'title')">
+                  <mat-button-toggle value="bold" (click)="ordenar(arrComics,'title','comics')">
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
-                    @if(toggleName){
+                    @if(toggleOrder['comics']){
                       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
                     }@else{
                       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
@@ -29,10 +32,12 @@
             <div *ngIf="comics.length > 0">
                 <div class="container-sub-items">
                     @for(comic of arrComics; track $index){
-                      <div class="sub-items animate__animated animate__fadeIn">
-                        <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="">
-                        <p>{{comic.title}}</p>
-                      </div>  
+                      @if(comic.visible != false ){
+                        <div class="sub-items animate__animated animate__fadeIn">
+                          <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="">
+                          <p>{{comic.title}}</p>
+                        </div>  
+                      }
                     }
                 </div>
             </div>
@@ -41,10 +46,13 @@
               [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
               [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Series</h3>
               @if(!isSeriesEmpty){
+                <div class="container-input">
+                  <input type="text" class="custom-caret-thick" [(ngModel)]="serieValue" (input)="filtro($event, arrSeries, 'title')" placeholder="Busca una serie..">
+                </div>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
                   <mat-button-toggle value="bold" >
-                    <mat-icon aria-hidden="false" (click)="ordenar(arrSeries, 'title')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
-                    @if(toggleName){
+                    <mat-icon aria-hidden="false" (click)="ordenar(arrSeries, 'title', 'series')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                    @if(toggleOrder['series']){
                       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
                     }@else{
                       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
@@ -56,10 +64,12 @@
             <div *ngIf="series.length > 0">
                 <div class="container-sub-items">
                     @for(serie of arrSeries; track $index){
-                      <div class="sub-items">
-                        <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="">
-                        <p>{{serie.title}}</p>
-                      </div>  
+                      @if(serie.visible != false ){
+                        <div class="sub-items">
+                          <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="">
+                          <p>{{serie.title}}</p>
+                        </div>  
+                      }
                     }
                 </div>
             </div>
@@ -68,10 +78,13 @@
                 [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
                 [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Events</h3>
                 @if(!isEventsEmpty){
+                  <div class="container-input">
+                    <input type="text" class="custom-caret-thick" [(ngModel)]="eventValue" (input)="filtro($event, arrEvents, 'title')" placeholder="Busca un evento..">
+                  </div>
                   <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
                     <mat-button-toggle value="bold" >
-                      <mat-icon aria-hidden="false" (click)="ordenar(arrEvents, 'title')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
-                      @if(toggleName){
+                      <mat-icon aria-hidden="false" (click)="ordenar(arrEvents, 'title', 'events')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                      @if(toggleOrder['events']){
                         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
                       }@else{
                         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
@@ -82,10 +95,12 @@
               </div>
               <div class="container-sub-items">
                   @for(event of arrEvents; track $index){
-                    <div class="sub-items">
-                      <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
-                      <p>{{event.title}}</p>
-                    </div>  
+                    @if(event.visible != false ){
+                      <div class="sub-items">
+                        <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
+                        <p>{{event.title}}</p>
+                      </div>  
+                    }
                   }
               </div>
         </div>

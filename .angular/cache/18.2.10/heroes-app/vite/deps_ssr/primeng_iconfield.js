@@ -1,7 +1,7 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   SharedModule
-} from "./chunk-SVVIDQHK.js";
+} from "./chunk-CCCNXAOE.js";
 import {
   CommonModule,
   NgClass
