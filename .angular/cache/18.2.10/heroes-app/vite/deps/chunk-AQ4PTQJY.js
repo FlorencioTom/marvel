@@ -1,4 +1,3 @@
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   Component,
   Directive,
@@ -17,14 +16,13 @@ import {
   ɵɵdirectiveInject,
   ɵɵprojection,
   ɵɵprojectionDef
-} from "./chunk-TKQWSO4T.js";
+} from "./chunk-2IRPN5DT.js";
 import {
-  require_cjs
-} from "./chunk-2H3L6IVL.js";
+  Subject
+} from "./chunk-66JPAEYR.js";
 import {
-  __spreadValues,
-  __toESM
-} from "./chunk-NQ4HTGF6.js";
+  __spreadValues
+} from "./chunk-3OV72XIM.js";
 
 // node_modules/primeng/fesm2022/primeng-utils.mjs
 var ObjectUtils = class _ObjectUtils {
@@ -290,7 +288,6 @@ function ZIndexUtils() {
 var zindexutils = ZIndexUtils();
 
 // node_modules/primeng/fesm2022/primeng-api.mjs
-var import_rxjs = __toESM(require_cjs(), 1);
 var _c0 = ["*"];
 var ConfirmEventType;
 (function(ConfirmEventType2) {
@@ -299,8 +296,8 @@ var ConfirmEventType;
   ConfirmEventType2[ConfirmEventType2["CANCEL"] = 2] = "CANCEL";
 })(ConfirmEventType || (ConfirmEventType = {}));
 var ConfirmationService = class _ConfirmationService {
-  requireConfirmationSource = new import_rxjs.Subject();
-  acceptConfirmationSource = new import_rxjs.Subject();
+  requireConfirmationSource = new Subject();
+  acceptConfirmationSource = new Subject();
   requireConfirmation$ = this.requireConfirmationSource.asObservable();
   accept = this.acceptConfirmationSource.asObservable();
   /**
@@ -341,7 +338,7 @@ var ConfirmationService = class _ConfirmationService {
   }], null, null);
 })();
 var ContextMenuService = class _ContextMenuService {
-  activeItemKeyChange = new import_rxjs.Subject();
+  activeItemKeyChange = new Subject();
   activeItemKeyChange$ = this.activeItemKeyChange.asObservable();
   activeItemKey;
   changeKey(key) {
@@ -603,8 +600,8 @@ var FilterService = class _FilterService {
   }], null, null);
 })();
 var MessageService = class _MessageService {
-  messageSource = new import_rxjs.Subject();
-  clearSource = new import_rxjs.Subject();
+  messageSource = new Subject();
+  clearSource = new Subject();
   messageObserver = this.messageSource.asObservable();
   clearObserver = this.clearSource.asObservable();
   /**
@@ -649,7 +646,7 @@ var MessageService = class _MessageService {
   }], null, null);
 })();
 var OverlayService = class _OverlayService {
-  clickSource = new import_rxjs.Subject();
+  clickSource = new Subject();
   clickObservable = this.clickSource.asObservable();
   add(event) {
     if (event) {
@@ -817,7 +814,7 @@ var PrimeNGConfig = class _PrimeNGConfig {
     menu: 1e3,
     tooltip: 1100
   };
-  translationSource = new import_rxjs.Subject();
+  translationSource = new Subject();
   translationObserver = this.translationSource.asObservable();
   getTranslation(key) {
     return this.translation[key];
@@ -1019,8 +1016,8 @@ var TranslationKeys = class {
   static BROWSE_FILES = "browseFiles";
 };
 var TreeDragDropService = class _TreeDragDropService {
-  dragStartSource = new import_rxjs.Subject();
-  dragStopSource = new import_rxjs.Subject();
+  dragStartSource = new Subject();
+  dragStopSource = new Subject();
   dragStart$ = this.dragStartSource.asObservable();
   dragStop$ = this.dragStopSource.asObservable();
   startDrag(event) {
@@ -1050,9 +1047,8 @@ export {
   FilterService,
   OverlayService,
   PrimeNGConfig,
-  Header,
   PrimeTemplate,
   SharedModule,
   TranslationKeys
 };
-//# sourceMappingURL=chunk-CCCNXAOE.js.map
+//# sourceMappingURL=chunk-AQ4PTQJY.js.map

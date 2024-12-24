@@ -8,12 +8,15 @@ import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule],
+  imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule, MatButtonModule, MatIconModule],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.scss'
 })
@@ -31,23 +34,24 @@ export class PersonajesComponent implements OnInit {
   name: string = '';
   searchByName: boolean = false;
   total: any;
+  pageInput: string = '';
 
   constructor(private router: Router) {}
   ngOnInit() {
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando personajes';
     });
-    this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
-      this.characters = response.data.results;
-      this.total = response.data.total;
-      //console.log(this.characters);
-      /*this.characters.forEach(x => {
-        if(x.thumbnail.path.includes('not_available')){
-          x.thumbnail.path = 'https://placehold.co/729x729?text=Sorry,+we+have+no+image+of+this+hero'
+    this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe({
+      next: response => {
+        this.characters = response.data.results;
+        this.total = response.data.total;
+      },
+      error: error => {
+        if(error.status === 429){
+          this.router.navigate(['/limite']);
         }
-      })*/
+      }
     });
-    
   }
 
   changePage(event: any){
@@ -94,7 +98,26 @@ export class PersonajesComponent implements OnInit {
     this.router.navigate(['/personajes', id]);
   }
 
+  get totalPages(): number {
+    return Math.ceil(this.total / this.rows);
+  }
+
+  goTo(): void {
+    const pageIndex = Number(this.pageInput) - 1;
+    if (pageIndex >= 0 && pageIndex < this.totalPages) {
+      this.currentPageIndex = pageIndex;
+      const firstRecordIndex = pageIndex * this.rows;
+      this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+        this.characters = response.data.results;
+        this.searchByName = false;
+      });
+      console.log(`Navegando a la página ${pageIndex + 1} (registro inicial: ${firstRecordIndex})`);
+    } else {
+      console.error('Número de página inválido');
+    }
+  }
+
 } 
 
-/**Si la pagina actual tiene mesnos de 20 personajes desabilitar siguientes paginas */
+
  

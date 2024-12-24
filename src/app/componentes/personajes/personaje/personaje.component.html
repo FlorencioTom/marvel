@@ -1,8 +1,13 @@
 <div class="character" *ngIf="!error">
-    <h1 class="title">{{character?.name}}</h1>
+    <button class="goBack" mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="title">
+      {{character?.name}}
+    </h1>
     <p class="description">
         {{character?.description}}
-        <span class="character-img-footer">Date of last modification: <span class="bold">{{character?.modified}}</span></span>
+        <!-- <span class="character-img-footer">Date of last modification: <span class="bold">{{character?.modified}}</span></span> -->
     </p>
     <div class="container-references">
         <div class="containeer-img">
@@ -30,12 +35,15 @@
               }
             </div>
             <div *ngIf="comics.length > 0">
+                @if(loadingComics){
+                  <mat-spinner></mat-spinner>
+                }
                 <div class="container-sub-items">
                     @for(comic of arrComics; track $index){
                       @if(comic.visible != false ){
-                        <div class="sub-items animate__animated animate__fadeIn">
-                          <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="">
-                          <p>{{comic.title}}</p>
+                        <div class="sub-items animate__animated animate__fadeIn" >
+                          <img [src]="comic?.thumbnail.path + '.' +comic?.thumbnail.extension" alt="" (click)="goToUri(comic.resourceURI)">
+                          <p  (click)="goToUri(comic.resourceURI)">{{comic.title}}</p>
                         </div>  
                       }
                     }
@@ -62,12 +70,15 @@
               }
             </div>
             <div *ngIf="series.length > 0">
+                @if(loadingSeries){
+                  <mat-spinner></mat-spinner>
+                }
                 <div class="container-sub-items">
                     @for(serie of arrSeries; track $index){
                       @if(serie.visible != false ){
                         <div class="sub-items">
-                          <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="">
-                          <p>{{serie.title}}</p>
+                          <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="" (click)="goToUri(serie.resourceURI)">
+                          <p (click)="goToUri(serie.resourceURI)">{{serie.title}}</p>
                         </div>  
                       }
                     }
@@ -93,15 +104,20 @@
                   </mat-button-toggle-group>
                 }
               </div>
-              <div class="container-sub-items">
-                  @for(event of arrEvents; track $index){
-                    @if(event.visible != false ){
-                      <div class="sub-items">
-                        <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="">
-                        <p>{{event.title}}</p>
-                      </div>  
+              <div *ngIf="events.length > 0">
+                @if(loadingEvents){
+                  <mat-spinner></mat-spinner>
+                }
+                <div class="container-sub-items">
+                    @for(event of arrEvents; track $index){
+                      @if(event.visible != false ){
+                        <div class="sub-items">
+                          <img [src]="event?.thumbnail.path + '.' +event?.thumbnail.extension" alt="" (click)="goToUri(event.resourceURI)">
+                          <p (click)="goToUri(event.resourceURI)">{{event.title}}</p>
+                        </div>  
+                      }
                     }
-                  }
+                </div>
               </div>
         </div>
     </div>

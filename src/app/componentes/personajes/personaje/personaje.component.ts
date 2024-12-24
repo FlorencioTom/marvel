@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-personaje',
@@ -45,13 +47,16 @@ export class PersonajeComponent implements OnInit {
   comicValue: string = '';
   serieValue: string = '';
   eventValue: string = '';
+  loadingComics: boolean = true;
+  loadingSeries: boolean = true;
+  loadingEvents: boolean = true;
   public toggleOrder: { [key: string]: boolean } = {
     comics: true, // Para los cómics
     series: true, // Para las series
     events: true  // Para los eventos (si es necesario)
   };
 
-  constructor(private route: ActivatedRoute, private marvelService: MarvelService) {}
+  constructor(private route: ActivatedRoute, private marvelService: MarvelService, private router: Router, private location: Location) {}
 
   public loadingService = inject(LoadingService);
 
@@ -61,11 +66,7 @@ export class PersonajeComponent implements OnInit {
       response => {
         this.character = response.data.results[0];
         console.log(this.character);
-        // this.handleComics();
-        // this.handleSeries();
-        // this.handleEvents();
         this.stories = this.character.stories.items;
-
         this.character.modified = this.formatDate(this.character.modified);
       }, error => {
         this.error = true;
@@ -104,6 +105,8 @@ export class PersonajeComponent implements OnInit {
       } catch (error) {
         console.error('Error al cargar los cómics:', error);
         this.loadingService.loadingText = 'Error al cargar los cómics';
+      } finally {
+        this.loadingComics = false; 
       }
     }
   }
@@ -124,6 +127,8 @@ export class PersonajeComponent implements OnInit {
       } catch (error) {
         console.error('Error al cargar las series:', error);
         this.loadingService.loadingText = 'Error al cargar las series';
+      } finally {
+        this.loadingSeries = false; 
       }
     }
   }
@@ -145,6 +150,8 @@ export class PersonajeComponent implements OnInit {
       } catch (error) {
         console.error('Error al cargar los eventos:', error);
         this.loadingService.loadingText = 'Error al cargar los eventos';
+      } finally {
+        this.loadingEvents = false; 
       }
     }
   }
@@ -193,6 +200,29 @@ export class PersonajeComponent implements OnInit {
       }
     });
     console.log(arr);
+  }
+
+  public goToUri(uri:string){
+    const id = uri.substring(uri.lastIndexOf("/") + 1);
+    switch (true) {
+      case uri.includes('public/comics'):
+        this.router.navigate(['/comics', id]);
+        break;
+      case uri.includes('public/series'):
+        this.router.navigate(['/series', id]);
+        break;
+      case uri.includes('public/events'):
+        this.router.navigate(['/eventos', id]);
+        break;
+      default:
+        console.log('No coincide con ningún caso');
+    }
+  }
+
+  goBack(buscador?: string, pagina?:number){
+    //Este metodo te lleva a la pagina anterior. 
+    //con el nombre del puscador y con su pagina
+    this.location.back();
   }
   
 }

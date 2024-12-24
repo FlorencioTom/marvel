@@ -41,11 +41,16 @@ export class ComicsComponent {
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando comics';
     });
-    this.marvelService.getComics(this.currentPageIndex, this.rows).subscribe(response => {
-      this.comics = response.data.results;
-      this.total = response.data.total;
-      //console.log(this.comics);
-      //console.log(response);
+    this.marvelService.getComics(this.currentPageIndex, this.rows).subscribe({
+      next: response => {
+        this.comics = response.data.results;
+        this.total = response.data.total;
+      },
+      error: error => {
+        if(error.status === 429){
+          this.router.navigate(['/limite']);
+        }
+      }
     });
   }
 

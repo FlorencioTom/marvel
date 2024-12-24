@@ -40,10 +40,16 @@ export class CreadoresComponent {
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando creadores';
     });
-    this.marvelService.getCreators(this.currentPageIndex, this.rows).subscribe(response => {
-      this.creators = response.data.results;
-      this.total = response.data.total;
-      console.log(this.creators);
+    this.marvelService.getCreators(this.currentPageIndex, this.rows).subscribe({
+      next: response => {
+        this.creators = response.data.results;
+        this.total = response.data.total;
+      },
+      error: error => {
+        if(error.status === 429){
+          this.router.navigate(['/limite']);
+        }
+      }
     });
   }
 

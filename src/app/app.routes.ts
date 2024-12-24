@@ -11,6 +11,7 @@ import { PersonajeComponent } from './componentes/personajes/personaje/personaje
 import { CreadorComponent } from './componentes/creadores/creador/creador.component';
 import { EventoComponent } from './componentes/eventos/evento/evento.component';
 import { SerieComponent } from './componentes/series/serie/serie.component';
+import { LimiteComponent } from './componentes/limite/limite.component';
 
 export const routes: Routes = [
     { path: 'personajes',  component: PersonajesComponent},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'series', component:  SeriesComponent},
     { path: 'series/:id', component:  SerieComponent},
     { path: 'historias', component: HistoriasComponent },
+    { path: 'limite', component: LimiteComponent },
     { path: '**', component: PersonajesComponent },
     { path: '', pathMatch: "prefix", redirectTo: 'personajes' },
 ];

@@ -3,7 +3,7 @@ import {
 } from "./chunk-M2NUOS5W.js";
 import {
   SharedModule
-} from "./chunk-FO7PJAA4.js";
+} from "./chunk-AQ4PTQJY.js";
 import "./chunk-3TC7O5T7.js";
 import "./chunk-32PQHR52.js";
 import {

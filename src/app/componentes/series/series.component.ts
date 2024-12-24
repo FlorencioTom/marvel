@@ -38,10 +38,16 @@ export class SeriesComponent {
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando series';
     });
-    this.marvelService.getSeries(this.currentPageIndex, this.rows).subscribe(response => {
-      this.series = response.data.results;
-      this.total = response.data.total;
-      console.log(this.series);
+    this.marvelService.getSeries(this.currentPageIndex, this.rows).subscribe({
+      next: response => {
+        this.series = response.data.results;
+        this.total = response.data.total;
+      },
+      error: error => {
+        if(error.status === 429){
+          this.router.navigate(['/limite']);
+        }
+      }
     });
   }
 

@@ -33,21 +33,21 @@ export class EventosComponent implements OnInit {
   total: any;
 
   constructor(private router: Router) {}
-  ngOnInit() {
+  ngOnInit(){
     setTimeout(() => {
       this.loadingService.loadingText = 'Cargando Eventos';
     });
-    this.marvelService.getEvents(this.currentPageIndex, this.rows).subscribe(response => {
-      this.events = response.data.results;
-      this.total = response.data.total;
-      console.log(this.events);
-      /*this.characters.forEach(x => {
-        if(x.thumbnail.path.includes('not_available')){
-          x.thumbnail.path = 'https://placehold.co/729x729?text=Sorry,+we+have+no+image+of+this+hero'
+    this.marvelService.getEvents(this.currentPageIndex, this.rows).subscribe({
+      next: response => {
+        this.events = response.data.results;
+        this.total = response.data.total;
+      },
+      error: error => {
+        if(error.status === 429){
+          this.router.navigate(['/limite']);
         }
-      })*/
+      }
     });
-    
   }
 
   changePage(event: any){

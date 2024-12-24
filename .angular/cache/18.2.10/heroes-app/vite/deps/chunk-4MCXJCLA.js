@@ -1,23 +1,21 @@
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   Injectable,
   InjectionToken,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-TKQWSO4T.js";
+} from "./chunk-2IRPN5DT.js";
 import {
-  require_cjs
-} from "./chunk-2H3L6IVL.js";
-import {
-  __toESM
-} from "./chunk-NQ4HTGF6.js";
+  ConnectableObservable,
+  Subject,
+  isObservable,
+  of
+} from "./chunk-66JPAEYR.js";
 
 // node_modules/@angular/cdk/fesm2022/collections.mjs
-var import_rxjs = __toESM(require_cjs(), 1);
 var DataSource = class {
 };
 function isDataSource(value) {
-  return value && typeof value.connect === "function" && !(value instanceof import_rxjs.ConnectableObservable);
+  return value && typeof value.connect === "function" && !(value instanceof ConnectableObservable);
 }
 var ArrayDataSource = class extends DataSource {
   constructor(_data) {
@@ -25,7 +23,7 @@ var ArrayDataSource = class extends DataSource {
     this._data = _data;
   }
   connect() {
-    return (0, import_rxjs.isObservable)(this._data) ? this._data : (0, import_rxjs.of)(this._data);
+    return isObservable(this._data) ? this._data : of(this._data);
   }
   disconnect() {
   }
@@ -139,7 +137,7 @@ var SelectionModel = class {
     this._selection = /* @__PURE__ */ new Set();
     this._deselectedToEmit = [];
     this._selectedToEmit = [];
-    this.changed = new import_rxjs.Subject();
+    this.changed = new Subject();
     if (initiallySelectedValues && initiallySelectedValues.length) {
       if (_multiple) {
         initiallySelectedValues.forEach((value) => this._markSelected(value));
@@ -378,7 +376,6 @@ export {
   ArrayDataSource,
   _VIEW_REPEATER_STRATEGY,
   _RecycleViewRepeaterStrategy,
-  SelectionModel,
-  UniqueSelectionDispatcher
+  SelectionModel
 };
-//# sourceMappingURL=chunk-MFOYP5TT.js.map
+//# sourceMappingURL=chunk-4MCXJCLA.js.map

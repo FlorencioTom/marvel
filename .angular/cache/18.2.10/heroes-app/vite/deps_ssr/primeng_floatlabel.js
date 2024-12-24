@@ -4,7 +4,7 @@ import {
 } from "./chunk-AJCWDVTT.js";
 import {
   SharedModule
-} from "./chunk-CCCNXAOE.js";
+} from "./chunk-SVVIDQHK.js";
 import "./chunk-NBDRSUDG.js";
 import "./chunk-NLAQVFGP.js";
 import {
