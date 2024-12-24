@@ -16,7 +16,7 @@
         <div class="grid-item" *ngFor="let creator of creators" (click)="goToCreator(creator.id)">
             <img [src]="creator.thumbnail.path+'.'+creator.thumbnail.extension" [alt]="creator.name">
             <div class="item-name-container">
-                <p class="item-name">{{creator.firstName}}</p>
+                <p class="item-name">{{creator.firstName +' '+ creator.middleName +' '+ creator.lastName}}</p>
             </div>
         </div>
     </div>
