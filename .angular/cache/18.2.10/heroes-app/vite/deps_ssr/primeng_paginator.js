@@ -2,15 +2,17 @@ import { createRequire } from 'module';const require = createRequire(import.meta
 import {
   AutoFocus,
   AutoFocusModule,
-  BaseIcon,
-  DomHandler,
   Dropdown,
   DropdownModule,
   Ripple,
   RippleModule,
   SpinnerIcon,
   TimesIcon
-} from "./chunk-DQFZVTFS.js";
+} from "./chunk-UBHDB2AW.js";
+import {
+  BaseIcon,
+  DomHandler
+} from "./chunk-XLDNLPT7.js";
 import {
   InputText,
   InputTextModule
@@ -21,7 +23,7 @@ import {
   PrimeTemplate,
   SharedModule
 } from "./chunk-SVVIDQHK.js";
-import "./chunk-6AZUOZL6.js";
+import "./chunk-GDDWCTP6.js";
 import {
   FormsModule,
   NG_VALUE_ACCESSOR,

@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, OnInit, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { MarvelService } from '../../servicios/marvel.service';
 import { MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { LoadingService } from '../../servicios/texto-spinner.service';
@@ -12,13 +12,28 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AtrasService } from '../../servicios/atras.service';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { ScrollToTopComponent } from '../scroll-to-top/scroll-to-top.component';
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule, InputTextModule, MatButtonModule, MatIconModule],
+  imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule,
+     InputTextModule, MatButtonModule, MatIconModule, ScrollToTopComponent],
   templateUrl: './personajes.component.html',
-  styleUrl: './personajes.component.scss'
+  styleUrl: './personajes.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  animations: [
+    trigger('slideFade', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }), 
+        animate('300ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('500ms ease', style({ transform: 'translateX(100%)', opacity: 0 })) 
+      ])
+    ]),
+  ]
 })
 
 export class PersonajesComponent implements OnInit {
@@ -27,7 +42,7 @@ export class PersonajesComponent implements OnInit {
   public atrasService = inject(AtrasService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
+  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef<any>;
 
   characters: any[] = []; 
   currentPageIndex: number = 0;
@@ -38,8 +53,31 @@ export class PersonajesComponent implements OnInit {
   total: any;
   pageInput: string = '';
   nameSearch: boolean = false;
+  showScrollTop: boolean = false;
+  threshold: number = 100;
 
   constructor(private router: Router) {}
+
+  ngAfterViewInit() {
+    if (this.scrollContainer) {
+      this.scrollContainer.nativeElement.addEventListener('scroll', () => this.checkScrollPosition());
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.scrollContainer) {
+      this.scrollContainer.nativeElement.removeEventListener('scroll', this.checkScrollPosition);
+    }
+  }
+
+  scrollToTop() {
+    this.scrollContainer.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  checkScrollPosition() {
+    const scrollTop = this.scrollContainer.nativeElement.scrollTop;
+    this.showScrollTop = scrollTop > this.threshold;
+  }
 
   ngOnInit() {
     setTimeout(() => {

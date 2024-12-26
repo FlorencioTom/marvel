@@ -20,13 +20,20 @@
         
 </div>
 <div class="container">
-    <div class="grid-container">
+    <div class="grid-container" #scrollContainer>
         <div class="grid-item" *ngFor="let character of characters" (click)="goToCharcater(character.id)">
             <img [src]="character.thumbnail.path+'.'+character.thumbnail.extension" [alt]="character.name">
             <div class="item-name-container">
                 <p class="item-name">{{character.name}}</p>
             </div>
         </div>
+        @if(showScrollTop){
+            <div @slideFade class="scroll-to-top animate__animated animate__slideInRight animate__faster" (click)="scrollToTop()">
+                <button mat-icon-button>
+                    <mat-icon>keyboard_double_arrow_up</mat-icon>
+                </button>
+            </div>
+        }
     </div>
 </div>
 @if(nameSearch){
@@ -34,4 +41,4 @@
         <p>Volver a los <br> personajes</p>
     </div>
 }
- 
+  

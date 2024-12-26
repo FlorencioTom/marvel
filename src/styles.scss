@@ -17,7 +17,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   position:absolute;
   z-index: 99px;
   cursor: pointer;
-  bottom: 50px;
+  bottom: 150px;
   right:50px;
   background-color: #000000d8;
   color:white;
@@ -154,10 +154,6 @@ button.goTo-icon{
     cursor: pointer;
   }
 
-  .logo-marvel:hover{
-    //marvel color #ec1d24
-  }
-
   @media (max-width: 1200px) {
     .grid-container {
       grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
@@ -247,6 +243,33 @@ button.goTo-icon{
       height: calc(100% - 95px);
     }
   }
+.scroll-to-top {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(169 192 245);
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 5px rgba(169, 192, 245, 0.6);
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+  
+.scroll-to-top:hover {
+  color: rgb(169 192 245);
+}
+  
+.scroll-to-top mat-icon {
+  font-size: 24px;
+  color: #3700b3;
+}
+
 
 
   

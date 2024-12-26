@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MarvelService } from '../../../servicios/marvel.service';
 import { DropdownModule } from 'primeng/dropdown';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AtrasComponent } from '../../atras/atras.component';
 import { AtrasService } from '../../../servicios/atras.service';
-
+import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-personaje',
   standalone: true,
@@ -26,7 +26,18 @@ import { AtrasService } from '../../../servicios/atras.service';
     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule,
     FormsModule, MatButtonModule, AtrasComponent],
   templateUrl: './personaje.component.html',
-  styleUrl: './personaje.component.scss'
+  styleUrl: './personaje.component.scss',
+    animations: [
+      trigger('slideFade', [
+        transition(':enter', [
+          style({ transform: 'translateX(100%)', opacity: 0 }), 
+          animate('300ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
+        ]),
+        transition(':leave', [
+          animate('500ms ease', style({ transform: 'translateX(100%)', opacity: 0 })) 
+        ])
+      ]),
+    ]
 })
 export class PersonajeComponent implements OnInit {
   id!: string; 
@@ -52,6 +63,8 @@ export class PersonajeComponent implements OnInit {
   loadingComics: boolean = true;
   loadingSeries: boolean = true;
   loadingEvents: boolean = true;
+  showScrollTop: boolean = false;
+  threshold: number = 100;
   atras:any = [];
   public toggleOrder: { [key: string]: boolean } = {
     comics: true, // Para los cómics
@@ -63,6 +76,28 @@ export class PersonajeComponent implements OnInit {
 
   public loadingService = inject(LoadingService);
   public atrasService = inject(AtrasService);
+  @ViewChild('charactercontainer', { static: false }) scrollContainer!: ElementRef<any>;
+
+  ngAfterViewInit() {
+    if (this.scrollContainer) {
+      this.scrollContainer.nativeElement.addEventListener('scroll', () => this.checkScrollPosition());
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.scrollContainer) {
+      this.scrollContainer.nativeElement.removeEventListener('scroll', this.checkScrollPosition);
+    }
+  }
+
+  scrollToTop() {
+    this.scrollContainer.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  checkScrollPosition() {
+    const scrollTop = this.scrollContainer.nativeElement.scrollTop;
+    this.showScrollTop = scrollTop > this.threshold;
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;

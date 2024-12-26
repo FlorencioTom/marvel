@@ -1,0 +1,23 @@
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #007ad9;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+  
+.scroll-to-top:hover {
+    background-color: #3700b3;
+    transform: scale(1.1);
+}
+  
+.scroll-to-top mat-icon {
+    font-size: 24px;
+}
