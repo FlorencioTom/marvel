@@ -7,8 +7,8 @@
             [totalRecords]="total" 
         />
         <div class="goTo-container">
-            <button mat-icon-button (click)="goTo()">
-                <mat-icon class="goTo-icon">arrow_forward</mat-icon>
+            <button mat-icon-button class="goTo-icon" (click)="goTo()">
+                <mat-icon>arrow_forward</mat-icon>
             </button>
             <input class="goTo-input" type="number" min="1" pInputText placeholder="nº" (keyup.enter)="goTo()"  [(ngModel)]="pageInput"  />
         </div>
@@ -29,4 +29,9 @@
         </div>
     </div>
 </div>
+@if(nameSearch){
+    <div class="backToAllCharacters" (click)="backToAllCharacters()">
+        <p>Volver a los <br> personajes</p>
+    </div>
+}
  

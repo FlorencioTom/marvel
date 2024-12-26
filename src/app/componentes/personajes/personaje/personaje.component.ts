@@ -16,13 +16,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AtrasComponent } from '../../atras/atras.component';
+import { AtrasService } from '../../../servicios/atras.service';
 
 @Component({
   selector: 'app-personaje',
   standalone: true,
   imports: [DropdownModule, FloatLabelModule, CommonModule, MatProgressSpinnerModule,
-     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule, 
-     FormsModule, MatButtonModule],
+    MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule,
+    FormsModule, MatButtonModule, AtrasComponent],
   templateUrl: './personaje.component.html',
   styleUrl: './personaje.component.scss'
 })
@@ -50,6 +52,7 @@ export class PersonajeComponent implements OnInit {
   loadingComics: boolean = true;
   loadingSeries: boolean = true;
   loadingEvents: boolean = true;
+  atras:any = [];
   public toggleOrder: { [key: string]: boolean } = {
     comics: true, // Para los cómics
     series: true, // Para las series
@@ -59,6 +62,7 @@ export class PersonajeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private marvelService: MarvelService, private router: Router, private location: Location) {}
 
   public loadingService = inject(LoadingService);
+  public atrasService = inject(AtrasService);
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
@@ -71,6 +75,8 @@ export class PersonajeComponent implements OnInit {
       }, error => {
         this.error = true;
     })
+    this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
+    
   }
 
   get isComicsEmpty(): boolean {

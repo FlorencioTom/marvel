@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
-import { RouterModule } from '@angular/router'; // Importa RouterModule
+import { RouterModule } from '@angular/router'; 
+import { AtrasService } from '../../servicios/atras.service';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +13,8 @@ import { RouterModule } from '@angular/router'; // Importa RouterModule
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+  atrasService = inject(AtrasService);
+  setAtras(){
+    this.atrasService.reset();
+  }
 }

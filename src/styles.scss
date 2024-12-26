@@ -14,13 +14,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
 }
 .backToAllCharacters{
+  position:absolute;
+  z-index: 99px;
   cursor: pointer;
-  background-color: #000000;
+  bottom: 50px;
+  right:50px;
+  background-color: #000000d8;
   color:white;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.6);
   animation: float 10s ease infinite; 
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: #ec1d24d2;
+    box-shadow: 0 0 15px 5px  #ec1d24;;
+  }
+  p{
+    margin:0px;
+    text-align: center;
+  }
 }
 .paginator-section{
   display: flex;
@@ -28,9 +41,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .goTo-container{
   display: flex;
+  gap: 20px;
 }
-.goTo-icon{
+button.goTo-icon{
   color:#1D4ED8;
+  background-color:#a9c0f5;
 }
 .goTo-input{
   width: 50px;
@@ -79,6 +94,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     max-height: 200px; 
     position: relative;
     cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(0.95); 
+    }
   }
   
   .grid-item img { 

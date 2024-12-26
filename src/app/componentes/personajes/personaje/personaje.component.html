@@ -1,13 +1,10 @@
 <div class="character" *ngIf="!error">
-    <button class="goBack" mat-icon-button (click)="goBack()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
+    <app-atras [pagN]="atras[0]" [filter]="atras[1]" [pag]="atras[2]"/>
     <h1 class="title">
       {{character?.name}}
     </h1>
     <p class="description">
         {{character?.description}}
-        <!-- <span class="character-img-footer">Date of last modification: <span class="bold">{{character?.modified}}</span></span> -->
     </p>
     <div class="container-references">
         <div class="containeer-img">
