@@ -1,29 +1,26 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
+  InputText,
+  InputTextModule
+} from "./chunk-NHLIHVKW.js";
+import {
   AutoFocus,
   AutoFocusModule,
+  BaseIcon,
+  DomHandler,
   Dropdown,
   DropdownModule,
   Ripple,
   RippleModule,
   SpinnerIcon,
   TimesIcon
-} from "./chunk-UBHDB2AW.js";
-import {
-  BaseIcon,
-  DomHandler
-} from "./chunk-XLDNLPT7.js";
-import {
-  InputText,
-  InputTextModule
-} from "./chunk-NHLIHVKW.js";
+} from "./chunk-MDNF73RF.js";
 import {
   ObjectUtils,
   PrimeNGConfig,
   PrimeTemplate,
   SharedModule
 } from "./chunk-SVVIDQHK.js";
-import "./chunk-GDDWCTP6.js";
 import {
   FormsModule,
   NG_VALUE_ACCESSOR,
@@ -31,6 +28,7 @@ import {
   NgControlStatus,
   NgModel
 } from "./chunk-BF2IJN4L.js";
+import "./chunk-GDDWCTP6.js";
 import {
   CommonModule,
   DOCUMENT,

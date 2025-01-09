@@ -134,7 +134,6 @@ export class PersonajesComponent implements OnInit {
     if(this.name === ''){
       this.nameSearch = false;
       this.backToAllCharacters();
-      
     }else{
       this.currentPageIndex = 0;
       this.searchByName = true;
