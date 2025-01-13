@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, ElementRef, OnInit, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MarvelService } from '../../servicios/marvel.service';
 import { MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { LoadingService } from '../../servicios/texto-spinner.service';
@@ -172,10 +172,20 @@ export class PersonajesComponent implements OnInit {
     if (pageIndex >= 0 && pageIndex < this.totalPages) {
       this.currentPageIndex = pageIndex;
       const firstRecordIndex = pageIndex * this.rows;
-      this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
-        this.characters = response.data.results;
-        this.searchByName = false;
-      });
+
+      if(this.searchByName){
+        this.marvelService.getCharactersByName(this.currentPageIndex, this.rows, this.name).subscribe(response => {
+          this.characters = response.data.results;
+          this.total = response.data.total;
+          this.nameSearch = true;
+        });
+      }else{
+        this.marvelService.getCharacters(this.currentPageIndex, this.rows).subscribe(response => {
+          this.characters = response.data.results;
+          this.searchByName = false;
+        });
+      }
+
     } else {
       console.error('Número de página inválido');
     }

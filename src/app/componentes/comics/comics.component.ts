@@ -172,10 +172,19 @@ export class ComicsComponent implements OnInit  {
     if (pageIndex >= 0 && pageIndex < this.totalPages) {
       this.currentPageIndex = pageIndex;
       const firstRecordIndex = pageIndex * this.rows;
-      this.marvelService.getComics(this.currentPageIndex, this.rows).subscribe(response => {
-        this.comics = response.data.results;
-        this.searchByName = false;
-      });
+
+      if(this.searchByName){
+        this.marvelService.getComicsByTitle(this.currentPageIndex, this.rows, this.name).subscribe(response => {
+          this.comics = response.data.results;
+          this.total = response.data.total;
+          this.nameSearch = true;
+        });
+      }else{
+        this.marvelService.getComics(this.currentPageIndex, this.rows).subscribe(response => {
+          this.comics = response.data.results;
+          this.searchByName = false;
+        });
+      }
     } else {
       console.error('Número de página inválido');
     }
