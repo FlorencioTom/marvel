@@ -4,7 +4,7 @@
         {{comic?.title}}
     </h1>
     <p class="description">
-        {{comic?.textObjects?.[0]?.text || '' }}
+        {{comic?.description}}
     </p>
    <div class="container-references">
         <div class="containeer-img">
@@ -14,13 +14,13 @@
             <div class="title-section">
                 <h3 (click)="handleCharacters()" class="example-ripple-container" matRipple
                 [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}">Characters</h3>
+                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCharacterEmpty ? '0%' : '100%'}">Personajes</h3>
                 @if(!isCharacterEmpty){
                     <div class="container-input">
-                      <input type="text" class="custom-caret-thick" [(ngModel)]="charcterValue" (input)="filtro($event, arrCharacter, 'title')" placeholder="Busca un peronaje..">
+                      <input type="text" class="custom-caret-thick" [(ngModel)]="characterValue" (input)="filtro($event, arrCharacters, 'name')" placeholder="Busca un peronaje..">
                     </div>
                     <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
-                      <mat-button-toggle value="bold" (click)="ordenar(arrCharacter,'name','charcters')">
+                      <mat-button-toggle value="bold" (click)="ordenar(arrCharacters,'name','characters')">
                         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
                         @if(toggleOrder['characters']){
                           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
@@ -49,9 +49,9 @@
             <div class="title-section">
                 <h3 (click)="handleSeries()" class="example-ripple-container" matRipple
                 [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Series</h3>
+                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Serie</h3>
                 @if(!isSeriesEmpty){
-                  <div class="container-input">
+                  <!-- <div class="container-input">
                     <input type="text" class="custom-caret-thick" [(ngModel)]="serieValue" (input)="filtro($event, arrSeries, 'title')" placeholder="Busca una serie..">
                   </div>
                   <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
@@ -63,28 +63,24 @@
                         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
                       }
                     </mat-button-toggle>
-                  </mat-button-toggle-group>
+                  </mat-button-toggle-group> -->
                 }
             </div>
-            <div *ngIf="series.length > 0">
+            <div *ngIf="arrSeries.length != 0">
                 @if(loadingSeries){
                   <mat-spinner></mat-spinner>
                 }
                 <div class="container-sub-items">
-                    @for(serie of arrSeries; track $index){
-                      @if(serie.visible != false ){
-                        <div class="sub-items">
-                          <img [src]="serie?.thumbnail.path + '.' +serie?.thumbnail.extension" alt="" (click)="goToUri(serie.resourceURI)">
-                          <p (click)="goToUri(serie.resourceURI)">{{serie.title}}</p>
-                        </div>  
-                      }
-                    }
+                  <div class="sub-items">
+                    <img [src]="arrSeries?.thumbnail.path + '.' +arrSeries?.thumbnail.extension" alt="" (click)="goToUri(arrSeries.resourceURI)">
+                    <p (click)="goToUri(arrSeries.resourceURI)">{{arrSeries.title}}</p>
+                  </div>  
                 </div>
             </div>
             <div class="title-section">
                 <h3 (click)="handleEvents()" class="example-ripple-container" matRipple
                   [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Events</h3>
+                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Eventos</h3>
                 @if(!isEventsEmpty){
                     <div class="container-input">
                       <input type="text" class="custom-caret-thick" [(ngModel)]="eventValue" (input)="filtro($event, arrEvents, 'title')" placeholder="Busca un evento..">
@@ -119,14 +115,14 @@
             <div class="title-section">
                 <h3 (click)="handleCreators()" class="example-ripple-container" matRipple
                   [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCreatorsEmpty ? '0%' : '100%'}">Creators</h3>
+                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCreatorsEmpty ? '0%' : '100%'}">Creadores</h3>
                 @if(!isCreatorsEmpty){
                     <div class="container-input">
-                      <input type="text" class="custom-caret-thick" [(ngModel)]="creatorValue" (input)="filtro($event, arrCreators, 'name')" placeholder="Busca un creador..">
+                      <input type="text" class="custom-caret-thick" [(ngModel)]="creatorValue" (input)="filtro($event, arrCreators, 'fullName')" placeholder="Busca un creador..">
                     </div>
                     <mat-button-toggle-group name="fontStyle" aria-label="Font Style"  [hideSingleSelectionIndicator]="true" >
                       <mat-button-toggle value="bold" >
-                        <mat-icon aria-hidden="false" (click)="ordenar(arrCreators, 'name', 'creators')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
+                        <mat-icon aria-hidden="false" (click)="ordenar(arrCreators, 'fullName', 'creators')" aria-label="Example home icon" fontIcon="sort_by_alpha"></mat-icon>
                         @if(toggleOrder['events']){
                           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_downward"></mat-icon>
                         }@else{
@@ -145,7 +141,7 @@
                     @if(creator.visible != false ){
                       <div class="sub-items">
                         <img [src]="creator?.thumbnail.path + '.' +creator?.thumbnail.extension" alt="" (click)="goToUri(creator.resourceURI)">
-                        <p (click)="goToUri(creator.resourceURI)">{{creator.name}}</p>
+                        <p (click)="goToUri(creator.resourceURI)">{{creator.fullName}}</p>
                       </div>  
                     }
                   }
@@ -162,5 +158,5 @@
     }
 </div>
 <div *ngIf="error" class="error">
-  <h1 class="error">We have no record of the comic you are trying to search for.</h1>
+  <h1 class="error">No hay constancia del comic que estas buscando.</h1>
 </div>

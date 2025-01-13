@@ -14,13 +14,14 @@ import {
   RippleModule,
   SpinnerIcon,
   TimesIcon
-} from "./chunk-MDNF73RF.js";
+} from "./chunk-NKVPLGKU.js";
 import {
   ObjectUtils,
   PrimeNGConfig,
   PrimeTemplate,
   SharedModule
 } from "./chunk-SVVIDQHK.js";
+import "./chunk-GDDWCTP6.js";
 import {
   FormsModule,
   NG_VALUE_ACCESSOR,
@@ -28,7 +29,6 @@ import {
   NgControlStatus,
   NgModel
 } from "./chunk-BF2IJN4L.js";
-import "./chunk-GDDWCTP6.js";
 import {
   CommonModule,
   DOCUMENT,
