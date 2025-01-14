@@ -115,7 +115,8 @@ export class ComicComponent {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    
+    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+
   }
 
   get isCharacterEmpty(): boolean {

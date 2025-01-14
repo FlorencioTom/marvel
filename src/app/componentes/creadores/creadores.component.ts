@@ -4,7 +4,7 @@ import { MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { LoadingService } from '../../servicios/texto-spinner.service';
 import { SpinnerModule } from '../../spinner.module';
 import { CommonModule } from '@angular/common';  // Importa CommonModule
-import { PaginatorModule } from 'primeng/paginator';
+import { PaginatorModule } from 'primeng/paginator'; 
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -159,7 +159,7 @@ export class CreadoresComponent {
   }
 
   goToCreator(id: number): void {
-    this.atrasService.setBackInfo(this.currentPageIndex, 'series', this.name, this.total);
+    this.atrasService.setBackInfo(this.currentPageIndex, 'creadores', this.name, this.total);
     this.router.navigate(['/creadores', id]);
   }
 

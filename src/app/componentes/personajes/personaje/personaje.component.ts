@@ -113,7 +113,8 @@ export class PersonajeComponent implements OnInit {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    
+    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+ 
   }
 
   get isComicsEmpty(): boolean {
