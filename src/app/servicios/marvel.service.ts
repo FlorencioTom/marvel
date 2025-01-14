@@ -185,7 +185,7 @@ export class MarvelService {
   }
 
 
-  getSeriesById(id:number): Observable<any> {
+  getSeriesById(id:string): Observable<any> {
     const authParams = this.createAuthParams();
     return this.http.get(`${this.baseUrl}/series/${id}?${authParams}`);
   }

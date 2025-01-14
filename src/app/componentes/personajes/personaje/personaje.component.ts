@@ -19,6 +19,7 @@ import { Location } from '@angular/common';
 import { AtrasComponent } from '../../atras/atras.component';
 import { AtrasService } from '../../../servicios/atras.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-personaje',
   standalone: true,
@@ -76,6 +77,7 @@ export class PersonajeComponent implements OnInit {
 
   public loadingService = inject(LoadingService);
   public atrasService = inject(AtrasService);
+  private _snackBar = inject(MatSnackBar);
   @ViewChild('charactercontainer', { static: false }) scrollContainer!: ElementRef<any>;
 
   ngAfterViewInit() {
@@ -147,7 +149,12 @@ export class PersonajeComponent implements OnInit {
         console.error('Error al cargar los cómics:', error);
         this.loadingService.loadingText = 'Error al cargar los cómics';
       } finally {
-        this.loadingComics = false; 
+        this.loadingComics = false;
+        if(this.arrComics.length === 0){
+          this._snackBar.open('La api de marvel no da comics para este personaje', 'OK', {
+            duration: 3000
+          });
+        } 
       }
     }
   }
@@ -170,6 +177,11 @@ export class PersonajeComponent implements OnInit {
         this.loadingService.loadingText = 'Error al cargar las series';
       } finally {
         this.loadingSeries = false; 
+        if(this.arrSeries.length === 0){
+          this._snackBar.open('La api de marvel no da series para este personaje', 'OK', {
+            duration: 3000
+          });
+        } 
       }
     }
   }
@@ -193,6 +205,11 @@ export class PersonajeComponent implements OnInit {
         this.loadingService.loadingText = 'Error al cargar los eventos';
       } finally {
         this.loadingEvents = false; 
+        if(this.arrEvents.length === 0){
+          this._snackBar.open('La api de marvel no da eventos para este personaje', 'OK', {
+            duration: 3000
+          });
+        } 
       }
     }
   }
