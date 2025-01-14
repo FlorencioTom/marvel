@@ -1,14 +1,22 @@
 <div class="sub-menu">
-    <p-paginator
-        (onPageChange)="changePage($event)" 
-        [first]="currentPageIndex * rows" 
-        [rows]="rows" 
-        [totalRecords]="total" 
-         />
-         <p-iconField iconPosition="left">
-            <p-inputIcon styleClass="pi pi-search" />
-            <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
-        </p-iconField>
+    <div class="paginator-section">
+        <p-paginator
+            (onPageChange)="changePage($event)" 
+            [first]="currentPageIndex * rows" 
+            [rows]="rows" 
+            [totalRecords]="total" 
+        />
+        <div class="goTo-container">
+            <button mat-icon-button class="goTo-icon" (click)="goTo()">
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+            <input class="goTo-input" type="number" min="1" pInputText placeholder="nº" (keyup.enter)="goTo()"  [(ngModel)]="pageInput"  />
+        </div>
+    </div>
+    <p-iconField iconPosition="left">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" (keyup.enter)="firstCall()" />
+    </p-iconField>
         
 </div>
 <div class="container">
@@ -19,5 +27,17 @@
                 <p class="item-name">{{creator.firstName +' '+ creator.middleName +' '+ creator.lastName}}</p>
             </div>
         </div>
+        @if(showScrollTop){
+            <div @slideFade class="scroll-to-top animate__animated animate__slideInRight animate__faster" (click)="scrollToTop()">
+                <button mat-icon-button>
+                    <mat-icon>keyboard_double_arrow_up</mat-icon>
+                </button>
+            </div>
+        }
     </div>
 </div>
+@if(nameSearch){
+    <div class="backToAllCharacters" (click)="backToAllCreators()">
+        <p>Volver a los <br> creadores</p>
+    </div>
+}
