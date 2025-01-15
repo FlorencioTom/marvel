@@ -132,7 +132,7 @@ export class CreadorComponent {
   }
 
   public async handleComics() {
-    this.loadingService.loadingText = 'Cargando comics relacionados con ' + this.creator?.name;
+    this.loadingService.loadingText = 'Cargando comics relacionados con ' + this.creator?.fullName;
     this.comics = this.creator.comics.items;
   
     if (this.arrComics.length === 0) {
@@ -159,7 +159,7 @@ export class CreadorComponent {
   }
 
   public async handleSeries() {
-    this.loadingService.loadingText = 'Cargando series relacionadas con ' + this.creator?.name;
+    this.loadingService.loadingText = 'Cargando series relacionadas con ' + this.creator?.fullName;
     this.series = this.creator.series.items;
   
     if (this.arrSeries.length === 0) {
@@ -186,7 +186,7 @@ export class CreadorComponent {
   }
 
   public async handleEvents() {
-    this.loadingService.loadingText = 'Cargando eventos relacionados con ' + this.creator?.name;
+    this.loadingService.loadingText = 'Cargando eventos relacionados con ' + this.creator?.fullName;
     this.events = this.creator.events.items;
   
     if (this.arrEvents.length === 0) {

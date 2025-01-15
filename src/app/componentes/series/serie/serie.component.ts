@@ -140,7 +140,7 @@ export class SerieComponent {
   }
 
   public async handleComics() {
-    this.loadingService.loadingText = 'Cargando comics relacionados con ' + this.serie?.name;
+    this.loadingService.loadingText = 'Cargando comics relacionados con ' + this.serie?.title;
     this.comics = this.serie.comics.items;
   
     if (this.arrComics.length === 0) {
@@ -167,7 +167,7 @@ export class SerieComponent {
   }
 
   public async handleEvents() {
-    this.loadingService.loadingText = 'Cargando eventos relacionados con ' + this.serie?.name;
+    this.loadingService.loadingText = 'Cargando eventos relacionados con ' + this.serie?.title;
     this.events = this.serie.events.items;
   
     if (this.arrEvents.length === 0) {
@@ -222,7 +222,7 @@ export class SerieComponent {
   }
 
   public async handleCreators() {
-    this.loadingService.loadingText = 'Cargando creadores relacionados con ' + this.serie?.name;
+    this.loadingService.loadingText = 'Cargando creadores relacionados con ' + this.serie?.title;
     this.creators = this.serie.creators.items;
   
     if (this.arrCreators.length === 0) {
