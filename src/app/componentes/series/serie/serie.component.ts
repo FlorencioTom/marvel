@@ -275,7 +275,7 @@ export class SerieComponent {
       if(!this.toggleOrder[seccion]){
         this.reordenar(arr, 'name');
       }else{
-        this.reordenar(arr, 'name', true);
+        this.reordenar(arr, 'name', true); 
       }
       this.toggleOrder[seccion] = !this.toggleOrder[seccion];
     }
