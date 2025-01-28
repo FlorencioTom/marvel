@@ -2,11 +2,11 @@
     <nav>
         <ul class="pages">
             @if(expand){
-                <li><a mat-button routerLink="/personajes" routerLinkActive="active" (click)="setAtras()"> <i class="fa-solid fa-mask"></i></a></li>
-                <li><a mat-button routerLink="/comics" routerLinkActive="active" (click)="setAtras()"> {{ 'comics.title' | translate}}</a></li>
-                <li><a mat-button routerLink="/series" routerLinkActive="active" (click)="setAtras()"> {{ 'series.title' | translate}}</a></li>
-                <li><a mat-button routerLink="/creadores" routerLinkActive="active" (click)="setAtras()"> <i class="fa-solid fa-pencil"></i></a></li>
-                <li><a mat-button routerLink="/eventos" routerLinkActive="active" (click)="setAtras()"> {{ 'events.title' | translate}}</a></li>
+                <li><a mat-button routerLink="/personajes" routerLinkActive="active" (click)="setAtras()"> <mat-icon class="mr-0">accessibility_new</mat-icon></a></li>
+                <li><a mat-button routerLink="/comics" routerLinkActive="active" (click)="setAtras()"> <mat-icon class="mr-0">auto_stories</mat-icon></a></li>
+                <li><a mat-button routerLink="/series" routerLinkActive="active" (click)="setAtras()"> <mat-icon class="mr-0">library_books</mat-icon> </a></li>
+                <li><a mat-button routerLink="/creadores" routerLinkActive="active" (click)="setAtras()"> <mat-icon class="mr-0">edit</mat-icon></a></li>
+                <li><a mat-button routerLink="/eventos" routerLinkActive="active" (click)="setAtras()"> <mat-icon class="mr-0">event</mat-icon> </a></li>
             }@else{
                 <li><a mat-button routerLink="/personajes" routerLinkActive="active" (click)="setAtras()"> {{ 'characters.title' | translate}}</a></li>
                 <li><a mat-button routerLink="/comics" routerLinkActive="active" (click)="setAtras()"> {{ 'comics.title' | translate}}</a></li>
