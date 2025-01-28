@@ -15,7 +15,7 @@
     font-size: 1.5rem; /* Reducir el tamaño de la fuente aún más en pantallas muy pequeñas */
     margin-left: 10px; /* Ajustar el margen izquierdo para pantallas más pequeñas */
     gap: 15px; /* Reducir el espacio entre los elementos */
-    margin-left: 20px;
+    margin-left: 65px;
   }
 }
 .goBack{
@@ -110,7 +110,7 @@
         }
     }
 }
- 
+
 .small-spinner {
     width: 30px !important;  
     height: 30px !important; 
@@ -132,13 +132,6 @@
     .character-img{
         width: 100%;
         position: static;
-    }
-    .title{
-        margin-bottom: 0px;
-        display: flex;
-        align-items: center;
-        gap:20px;
-        margin-left: 20px;
     }
 }
 @media (max-width: 690px) {
@@ -217,5 +210,3 @@
         right: 2px;
     }
 }
-
-  

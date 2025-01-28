@@ -184,6 +184,7 @@ button.goTo-icon{
     .grid-container{
       height: calc(100% - 130.58px);
     }
+
   }
   
   
@@ -269,6 +270,26 @@ button.goTo-icon{
   font-size: 24px;
   color: #3700b3;
 }
+.container-logo-marvel{
+  padding-top: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+app-personaje, app-comic, app-serie,
+app-creador, app-evento{
+  flex-grow: 1;
+}
+.d-flex{
+  display: flex;
+}
+
+.align-items-center{
+  align-items: center;
+}
+
 
 
 

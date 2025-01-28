@@ -1,8 +1,10 @@
 <div class="character" *ngIf="!error" #charactercontainer>
+  <div class="d-flex container-title">
     <app-atras [pagN]="atras[0]" [filter]="atras[1]" [pag]="atras[2]"/>
     <h1 class="title">
       {{character?.name}}
     </h1>
+  </div>
     <p class="description">
         {{character?.description}}
     </p>

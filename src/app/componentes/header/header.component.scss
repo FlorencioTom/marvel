@@ -28,15 +28,29 @@ nav{
 .logo-marvel{
     margin-right: 20px;
 }
+.collapse{
+    display: none;
+
+}
 
 @media (max-width: 900px) {
+    .collapse{
+        display:block;
+        color:#1D4ED8;
+        background-color:#a9c0f5;
+    }
     .logo-marvel{
         margin-top: 20px;
         margin-right: 0px;
     }
     header{
         width: 200px;
+        transition: width 0.5s ease;
         height: 100%;
+    }
+    .mini{
+        width: 100px;
+        transition:  width 0.5s ease;
     }
     nav{
         display: flex;
