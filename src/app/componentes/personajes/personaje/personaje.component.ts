@@ -20,6 +20,7 @@ import { AtrasComponent } from '../../atras/atras.component';
 import { AtrasService } from '../../../servicios/atras.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-personaje',
   standalone: true,
@@ -27,7 +28,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule,
     FormsModule, MatButtonModule, AtrasComponent],
   templateUrl: './personaje.component.html',
-  styleUrl: './personaje.component.scss',
+  /*styleUrl: './personaje.component.scss',*/
     animations: [
       trigger('slideFade', [
         transition(':enter', [

@@ -27,7 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule,
     FormsModule, MatButtonModule, AtrasComponent],
   templateUrl: './creador.component.html',
-  styleUrl: './creador.component.scss',
+  // styleUrl: './creador.component.scss',
   animations: [
     trigger('slideFade', [
       transition(':enter', [
