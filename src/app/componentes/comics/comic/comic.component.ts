@@ -109,13 +109,13 @@ export class ComicComponent {
     this.marvelService.getComicById(this.id).subscribe(
       response => {
         this.comic = response.data.results[0];
-        console.log(this.comic);
+        //console.log(this.comic);
         this.comic.modified = this.formatDate(this.comic.modified);
       }, error => {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+    //console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
 
   }
 
@@ -142,7 +142,7 @@ export class ComicComponent {
   public async handleCharacters() {
     this.loadingService.loadingText = 'Cargando personajes relacionados con ' + this.comic?.title;
     this.characters = this.comic.characters.items;
-    console.log(this.characters);
+    //console.log(this.characters);
     if (this.arrCharacters.length === 0) {
       const charactersRequests = this.characters.map((x: { resourceURI: string }) =>
         firstValueFrom(this.marvelService.getUriInfo(x.resourceURI))
@@ -231,7 +231,7 @@ export class ComicComponent {
         this.loadingService.loadingText = 'Error al cargar los creadores';
       } finally {
         this.loadingCreators = false; 
-        console.log(this.creators, this.arrCreators);
+        //console.log(this.creators, this.arrCreators);
         if(this.arrCreators.length === 0){
           this._snackBar.open('La api de marvel no da creadores para este comic', 'OK', {
             duration: 3000

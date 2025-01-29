@@ -106,13 +106,13 @@ export class CreadorComponent {
     this.marvelService.getCreatorById(this.id).subscribe(
       response => {
         this.creator = response.data.results[0];
-        console.log(this.creator);
+        //console.log(this.creator);
         this.creator.modified = this.formatDate(this.creator.modified);
       }, error => {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+    //console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
   }
 
   get isComicsEmpty(): boolean {
@@ -256,7 +256,7 @@ export class CreadorComponent {
         x.visible = false;
       }
     });
-    console.log(arr);
+    //console.log(arr);
   }
 
   public goToUri(uri:string){
@@ -272,7 +272,7 @@ export class CreadorComponent {
         this.router.navigate(['/eventos', id]);
         break;
       default:
-        console.log('No coincide con ningún caso');
+        //console.log('No coincide con ningún caso');
     }
   }
 

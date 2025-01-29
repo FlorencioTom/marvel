@@ -106,7 +106,7 @@ export class SerieComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.id);
+    //console.log(this.id);
     this.marvelService.getSeriesById(this.id).subscribe(
       response => {
         this.serie = response.data.results[0];
@@ -115,7 +115,7 @@ export class SerieComponent {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+    //console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
 
   }
 
@@ -197,7 +197,7 @@ export class SerieComponent {
   public async handleCharacters() {
     this.loadingService.loadingText = 'Cargando personajes relacionados con ' + this.serie?.title;
     this.characters = this.serie.characters.items;
-    console.log(this.characters);
+    //console.log(this.characters);
     if (this.arrCharacters.length === 0) {
       const charactersRequests = this.characters.map((x: { resourceURI: string }) =>
         firstValueFrom(this.marvelService.getUriInfo(x.resourceURI))
@@ -239,7 +239,7 @@ export class SerieComponent {
         this.loadingService.loadingText = 'Error al cargar los creadores';
       } finally {
         this.loadingCreators = false; 
-        console.log(this.creators, this.arrCreators);
+        //console.log(this.creators, this.arrCreators);
         if(this.arrCreators.length === 0){
           this._snackBar.open('La api de marvel no da creadores para esta serie', 'OK', {
             duration: 3000
@@ -308,7 +308,7 @@ export class SerieComponent {
         x.visible = false;
       }
     });
-    console.log(arr);
+    //console.log(arr);
   }
 
   public goToUri(uri:string){
@@ -327,7 +327,7 @@ export class SerieComponent {
         this.router.navigate(['/eventos', id]);
         break;
       default:
-        console.log('No coincide con ningún caso');
+        //console.log('No coincide con ningún caso');
     }
   }
 

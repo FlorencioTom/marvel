@@ -107,14 +107,14 @@ export class PersonajeComponent implements OnInit {
     this.marvelService.getCharacterById(this.id).subscribe(
       response => {
         this.character = response.data.results[0];
-        console.log(this.character);
+        //console.log(this.character);
         this.stories = this.character.stories.items;
         this.character.modified = this.formatDate(this.character.modified);
       }, error => {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+    //console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
  
   }
 
@@ -259,7 +259,7 @@ export class PersonajeComponent implements OnInit {
         x.visible = false;
       }
     });
-    console.log(arr);
+    //console.log(arr);
   }
 
   public goToUri(uri:string){
@@ -275,7 +275,7 @@ export class PersonajeComponent implements OnInit {
         this.router.navigate(['/eventos', id]);
         break;
       default:
-        console.log('No coincide con ningún caso');
+        //console.log('No coincide con ningún caso');
     }
   }
 

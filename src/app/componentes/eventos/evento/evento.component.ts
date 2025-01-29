@@ -110,7 +110,7 @@ export class EventoComponent {
         this.error = true;
     })
     this.atras = [this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle];
-    console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
+    //console.log([this.atrasService.pageNum, this.atrasService.filterText, this.atrasService.pageTitle]);
  
   }
 
@@ -187,7 +187,7 @@ export class EventoComponent {
   public async handleCharacters() {
     this.loadingService.loadingText = 'Cargando personajes relacionados con ' + this.event?.title;
     this.characters = this.event.characters.items;
-    console.log(this.characters);
+    //console.log(this.characters);
     if (this.arrCharacters.length === 0) {
       const charactersRequests = this.characters.map((x: { resourceURI: string }) =>
         firstValueFrom(this.marvelService.getUriInfo(x.resourceURI))
@@ -271,7 +271,7 @@ export class EventoComponent {
         x.visible = false;
       }
     });
-    console.log(arr);
+    //console.log(arr);
   }
 
   public goToUri(uri:string){
@@ -290,7 +290,7 @@ export class EventoComponent {
         this.router.navigate(['/personajes', id]);
         break;
       default:
-        console.log('No coincide con ningún caso');
+        //console.log('No coincide con ningún caso');
     }
   }
 

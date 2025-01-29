@@ -58,7 +58,7 @@ export class HistoriasComponent implements OnInit {
 
   changePage(event: any){
     this.currentPageIndex = event.page;
-    console.log(this.currentPageIndex);
+    //console.log(this.currentPageIndex);
     if(this.searchByName){
       this.searchStoriesByName(event.page);
     }else{

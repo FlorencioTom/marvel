@@ -19,9 +19,9 @@ export class AtrasComponent {
   constructor(private router: Router) {}
 
   goBack(){
-    console.log(this.pagN, this.filter, this.pag);
+    //console.log(this.pagN, this.filter, this.pag);
     if(this.pag === undefined || this.pag === undefined){
-      console.log('No hay pagina anterior a la qur volver');
+      //console.log('No hay pagina anterior a la qur volver');
     }else{
       this.router.navigate([`/${this.pag}`]);
     }
