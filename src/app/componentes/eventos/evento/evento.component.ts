@@ -20,12 +20,13 @@ import { AtrasComponent } from '../../atras/atras.component';
 import { AtrasService } from '../../../servicios/atras.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-evento',
   standalone: true,
   imports: [DropdownModule, FloatLabelModule, CommonModule, MatProgressSpinnerModule,
     MatRippleModule, MatButtonToggleModule, MatIconModule, MatFormFieldModule, MatInputModule,
-    FormsModule, MatButtonModule, AtrasComponent],
+    FormsModule, MatButtonModule, AtrasComponent, TranslateModule],
   templateUrl: './evento.component.html',
   // styleUrl: './evento.component.scss',
   animations: [

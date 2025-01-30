@@ -14,12 +14,13 @@ import { Router } from '@angular/router';
 import { AtrasService } from '../../servicios/atras.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ScrollToTopComponent } from '../scroll-to-top/scroll-to-top.component';
+import { TranslateModule } from '@ngx-translate/core'; 
 
 @Component({
   selector: 'app-series',
   standalone: true,
   imports: [SpinnerModule, MatPaginatorModule, CommonModule, PaginatorModule, IconFieldModule, InputIconModule,
-    InputTextModule, MatButtonModule, MatIconModule, ScrollToTopComponent],
+    InputTextModule, MatButtonModule, MatIconModule, ScrollToTopComponent, TranslateModule],
   templateUrl: './series.component.html',
   styleUrl: './series.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

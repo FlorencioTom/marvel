@@ -16,7 +16,7 @@
             <div class="title-section">
                 <h3 (click)="handleCharacters()" class="example-ripple-container" matRipple
                 [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCharacterEmpty ? '0%' : '100%'}">Personajes</h3>
+                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCharacterEmpty ? '0%' : '100%'}">{{ 'characters.title' | translate}}</h3>
                 @if(!isCharacterEmpty){
                     <div class="container-input">
                       <input type="text" class="custom-caret-thick" [(ngModel)]="characterValue" (input)="filtro($event, arrCharacters, 'name')" placeholder="Busca un peronaje..">
@@ -51,7 +51,7 @@
             <div class="title-section">
                 <h3 (click)="handleSeries()" class="example-ripple-container" matRipple
                 [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Serie</h3>
+                [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">{{ 'series.title' | translate}}</h3>
                 @if(!isSeriesEmpty){
                   <!-- <div class="container-input">
                     <input type="text" class="custom-caret-thick" [(ngModel)]="serieValue" (input)="filtro($event, arrSeries, 'title')" placeholder="Busca una serie..">
@@ -82,7 +82,7 @@
             <div class="title-section">
                 <h3 (click)="handleEvents()" class="example-ripple-container" matRipple
                   [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Eventos</h3>
+                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">{{ 'events.title' | translate}}</h3>
                 @if(!isEventsEmpty){
                     <div class="container-input">
                       <input type="text" class="custom-caret-thick" [(ngModel)]="eventValue" (input)="filtro($event, arrEvents, 'title')" placeholder="Busca un evento..">
@@ -117,7 +117,7 @@
             <div class="title-section">
                 <h3 (click)="handleCreators()" class="example-ripple-container" matRipple
                   [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCreatorsEmpty ? '0%' : '100%'}">Creadores</h3>
+                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isCreatorsEmpty ? '0%' : '100%'}">{{ 'creators.title' | translate}}</h3>
                 @if(!isCreatorsEmpty){
                     <div class="container-input">
                       <input type="text" class="custom-caret-thick" [(ngModel)]="creatorValue" (input)="filtro($event, arrCreators, 'fullName')" placeholder="Busca un creador..">

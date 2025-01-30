@@ -14,7 +14,7 @@
             <div class="title-section">
                 <h3 (click)="handleComics()" class="example-ripple-container" matRipple
                     [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                    [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}">Comics</h3>
+                    [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isComicsEmpty ? '0%' : '100%'}">{{ 'comics.title' | translate}}</h3>
                 @if(!isComicsEmpty){
                   <div class="container-input">
                     <input type="text" class="custom-caret-thick" [(ngModel)]="comicValue" (input)="filtro($event, arrComics, 'title')" placeholder="Busca un comic..">
@@ -49,7 +49,7 @@
             <div class="title-section">
                 <h3 (click)="handleSeries()" class="example-ripple-container" matRipple
                     [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                    [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">Series</h3>
+                    [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isSeriesEmpty ? '0%' : '100%'}">{{ 'series.title' | translate}}</h3>
                 @if(!isSeriesEmpty){
                   <div class="container-input">
                     <input type="text" class="custom-caret-thick" [(ngModel)]="serieValue" (input)="filtro($event, arrSeries, 'title')" placeholder="Busca una serie..">
@@ -84,7 +84,7 @@
             <div class="title-section">
                 <h3 (click)="handleEvents()" class="example-ripple-container" matRipple
                   [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">Events</h3>
+                  [matRippleRadius]="radius" [matRippleColor]="color" [ngStyle]="{'--after-width': isEventsEmpty ? '0%' : '100%'}">{{ 'events.title' | translate}}</h3>
                 @if(!isEventsEmpty){
                     <div class="container-input">
                       <input type="text" class="custom-caret-thick" [(ngModel)]="eventValue" (input)="filtro($event, arrEvents, 'title')" placeholder="Busca un evento..">
