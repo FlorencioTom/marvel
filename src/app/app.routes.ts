@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HistoriasComponent } from './componentes/historias/historias.component';
 import { CreadoresComponent } from './componentes/creadores/creadores.component';
 import { EventosComponent } from './componentes/eventos/eventos.component';
 import { SeriesComponent } from './componentes/series/series.component';
@@ -24,7 +23,6 @@ export const routes: Routes = [
     { path: 'eventos/:id', component:  EventoComponent},
     { path: 'series', component:  SeriesComponent},
     { path: 'series/:id', component:  SerieComponent},
-    { path: 'historias', component: HistoriasComponent },
     { path: 'limite', component: LimiteComponent },
     { path: '**', component: PersonajesComponent },
     { path: '', pathMatch: "prefix", redirectTo: 'personajes' },
